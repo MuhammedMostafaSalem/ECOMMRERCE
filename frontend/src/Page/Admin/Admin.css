@@ -1,0 +1,319 @@
+/* admin sidebar */
+#SideBar .logo {
+    width: 100%;
+}
+#SideBar .logo:hover {
+    filter: drop-shadow(0 0 10px var(--move-color));
+}
+#SideBar li {
+    padding: 0.5rem !important;
+}
+#SideBar a {
+    color: rgba(0, 0, 0, 0.493) !important;
+    background-color: transparent !important;
+    font: 200 1rem "Roboto" !important;
+    transition: all 0.5s !important;
+    cursor: url(../../images/pointer.png), auto !important;
+}
+#SideBar a:hover,
+#SideBar a#active {
+    color: var(--move-color) !important;
+    transform: scale(1.1);
+}
+.bar1 {
+    text-align: center;
+    background-color: var(--move-color);
+    color: var(--White-color);
+    border-radius: 10px;
+    padding: 5px;
+    cursor: url(../../images/pointer.png), auto;
+}
+.toggled {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .toggled {
+        display: block;
+    }
+    .bar2 {
+        text-align: center;
+        background-color: var(--move-color);
+        color: var(--White-color);
+        border-radius: 10px;
+        padding: 5px;
+        cursor: url(../../images/pointer.png), auto;
+    }
+    .bar1 {
+        display: none;
+    }
+    .isNotToggled {
+        left: -250px;
+    }
+    .isToggled {
+        left: 0;
+    }
+    .adminPages {
+        position: absolute;
+        left: 0 !important;
+    }
+}
+
+
+
+
+
+
+
+/* Admin Dashboard */
+.dashboardSummary > div {
+    display: flex;
+    justify-content: center;
+}
+.dashboardSummary > div > p {
+    background-color: rgba(70, 117, 218, 0.932);
+    color: white;
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+}
+.dashboardSummaryBox > a {
+    color: rgb(0, 0, 0);
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgb(255, 233, 174);
+    text-decoration: none;
+    padding: 1.5rem;
+    width: 10vmax;
+    height: 10vmax;
+    margin: 2rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.lineChart {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+.doughnutChart {
+    width: 30vmax;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+
+
+
+
+
+/* Admin category items */
+.productListContainer .categoryItems table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.productListContainer .categoryItems th {
+    text-align: left;
+    padding: 5px;
+    background-color: var(--move-color);
+    color: var(--White-color);
+    text-transform: capitalize;
+}
+.productListContainer .categoryItems th:last-child,
+.productListContainer .categoryItems td:last-child {
+    text-align: end;
+}
+.productListContainer .categoryItems td {
+    width: 230px;
+}
+.productListContainer .categoryItems th:nth-child(2),
+.productListContainer .categoryItems td:nth-child(2) {
+    text-align: center;
+}
+
+
+
+
+
+/* Admin product items */
+.productListContainer {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 90.5vh;
+}
+.productListContainer .productListHeading {
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.productListContainer .productListHeading h1 {
+    color: #000000bb;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+.productListContainer .productListHeading .btn {
+    background-color: var(--move-color);
+    color: var(--White-color);
+    font-weight: 600;
+    cursor: url(../../images/pointer.png), auto;
+}
+.productListContainer .reviewsItems table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.productListContainer th {
+    text-align: left;
+    padding: 5px;
+    background-color: var(--move-color);
+    color: var(--White-color);
+    text-transform: capitalize;
+}
+.productListContainer th:last-child,
+.productListContainer td:last-child {
+    text-align: end;
+}
+.productListContainer td {
+    width: 230px;
+}
+.productListContainer th:nth-child(3),
+.productListContainer td:nth-child(3),
+.productListContainer th:nth-child(4),
+.productListContainer td:nth-child(4) {
+    text-align: center;
+}
+
+
+
+
+
+/* Admin orders list */
+.ordersListContainer {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 90.5vh;
+}
+.ordersListContainer #ordersListHeading {
+    color: #000000bb;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.ordersListContainer .orderItems table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.ordersListContainer th {
+    text-align: left;
+    padding: 5px;
+    background-color: var(--move-color);
+    color: var(--White-color);
+    text-transform: capitalize;
+}
+.ordersListContainer th:last-child,
+.ordersListContainer td:last-child {
+    text-align: end;
+}
+.ordersListContainer td {
+    width: 230px;
+}
+.ordersListContainer th:nth-child(3),
+.ordersListContainer td:nth-child(3),
+.ordersListContainer th:nth-child(4),
+.ordersListContainer td:nth-child(4) {
+    text-align: center;
+}
+
+
+
+
+
+/* Admin product reviews */
+.productReviewsContainer {
+    width: 100%;
+    box-sizing: border-box;
+    height: 100vh;
+}
+.productReviewsForm {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 3vmax;
+}
+.productReviewsFormHeading {
+    color: #000000bb;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+}
+.productReviewsForm > div {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin: 2rem;
+}
+.productReviewsForm > div > input {
+    padding: 1vmax 4vmax;
+    padding-right: 1vmax;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    font: 300 0.9vmax cursive;
+    outline: none;
+}
+.productReviewsForm > div > svg {
+    position: absolute;
+    transform: translateX(1vmax);
+    font-size: 1.6vmax;
+    color: #ffa700;
+}
+.productReviewsForm #createProductBtn {
+    background-color: var(--move-color);
+    color: var(--White-color);
+    font-weight: 600;
+    border: none;
+    width: 100%;
+    border-radius: 4px;
+    padding: 0.3rem 0;
+}
+.productReviewsContainer .reviewsItems table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.productReviewsContainer th {
+    text-align: left;
+    padding: 5px;
+    background-color: var(--move-color);
+    color: var(--White-color);
+    text-transform: capitalize;
+}
+.productReviewsContainer th:last-child,
+.productReviewsContainer td:last-child {
+    text-align: end;
+}
+.productReviewsContainer td {
+    width: 230px;
+}
+.productReviewsContainer th:nth-child(3),
+.productReviewsContainer td:nth-child(3),
+.productReviewsContainer th:nth-child(4),
+.productReviewsContainer td:nth-child(4) {
+    text-align: center;
+}

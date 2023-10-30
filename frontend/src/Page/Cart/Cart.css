@@ -1,0 +1,80 @@
+.cartPage table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.cartPage .cartInfo {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.cartPage .cartInfo img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+.cartPage .cartInfo .cartRemove {
+    color: tomato;
+    text-transform: capitalize;
+    font-size: 12px;
+    cursor: pointer;
+    width: 43px;
+}
+.cartPage th {
+    text-align: left;
+    padding: 5px;
+    background-color: var(--move-color);
+    color: var(--White-color);
+    text-transform: capitalize;
+}
+.cartPage th:last-child,
+.cartPage td:last-child {
+    text-align: end;
+}
+.cartPage td {
+    padding: 10px 5px;
+}
+.cartPage td .cartInput {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+.cartPage td .cartInput > button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.616);
+    cursor: pointer;
+    color: white;
+    transition: all 0.5s;
+}
+.cartPage td .cartInput > button:hover {
+    background-color: rgba(0, 0, 0, 0.767);
+}
+.cartPage td .cartInput > span {
+    padding: 10px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.74);
+}
+
+.cartCheckout {
+    display: flex;
+    justify-content: flex-end;
+}
+.cartCheckout table {
+    width: 350px;
+    border-top: 3px solid var(--move-color);
+    text-transform: capitalize;
+    font-weight: bold;
+}
+.cart-checkout {
+    background-color: var(--move-color);
+    color: var(--White-color);
+    width: 100%;
+    padding: 5px 0;
+    border: none;
+    border-radius: 20px;
+}
+
+@media (max-width: 575px) {
+    .cartInfo {
+        gap: 0;
+    }
+}

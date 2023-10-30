@@ -1,0 +1,21 @@
+.showNavbar {
+    position: static;
+    top: -90px;
+    /* display: flex;
+    width:100%;
+    flex-direction: column; */
+}
+.sticky_header {
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    transition: 2s;
+}
+.static_header {
+    position: sticky;
+    left: 0;
+    top: -90;
+    z-index: 999;
+    transition: 2s;
+}

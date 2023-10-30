@@ -1,0 +1,12 @@
+.linkPage {
+    color: var(--blue-color) !important;
+}
+.linkPage:focus {
+    box-shadow: none !important;
+}
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: var(--White-color) !important;
+    background-color: var(--move-color) !important;
+    border-color: var(--move-color)!important;
+}
