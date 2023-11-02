@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import Profile from "../../images/Profile.png"
 import { clearErrors, updateProfile } from "../../Redux/Actions/User/ProfileAction";
+import { loggedUser } from "../../Redux/Actions/Auth/AuthActions";
+import { useNavigate } from "react-router-dom";
+import { UPDATE_PROFILE_RESET } from "../../Redux/Types";
 
 const UpdateProfileHook = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -72,6 +76,20 @@ const UpdateProfileHook = () => {
 
         if(isUpdated) {
             console.log(isUpdated)
+
+            setTimeout(() => {
+                setName('')
+                setEmail('')
+                setAvatarPreview(Profile)
+            }, 1000)
+
+            setTimeout(() => {
+                navigate('/account');
+            }, 3000)
+
+            dispatch({
+                type: UPDATE_PROFILE_RESET,
+            });
         }
     }, [isUpdated, error, dispatch])
     

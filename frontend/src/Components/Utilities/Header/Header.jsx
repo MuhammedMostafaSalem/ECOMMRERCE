@@ -12,20 +12,18 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { toast } from 'react-toastify';
-import Profile from '../../../images/Profile.png'
+// import Profile from '../../../images/Profile.png'
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../Redux/Actions/Auth/AuthActions';
+import Cookie from 'cookie-universal'
 
 const Header = ({isAuthenticated, user}) => {
-    // const [user, setUser] = useState('');
-    // useEffect(() => {
-    //     if(localStorage.getItem("user")) {
-    //         setUser(JSON.parse(localStorage.getItem("user")))
-    //     }
-    // },[])
+    const cookies = Cookie();
+    const dispatch = useDispatch();
 
     const logoutUser = async() => {
-        // localStorage.removeItem('user')
-        // localStorage.removeItem('token')
-        // setUser('')
+        await dispatch(logout());
+        cookies.remove('token');
         toast("Logged Out Successfully");
     }
     
@@ -73,33 +71,37 @@ const Header = ({isAuthenticated, user}) => {
         <div className='divNavbar' >
             <header>
                 <Hamburger toggled={open} toggle={setOpen} color={open ? "#b696e0" : "#000"} />
-                <div className='menu-container'>
-                    <div className='imgUser' onClick={()=>{setOpenMenuUser(!openMenuUser)}}>
-                        <img src={Profile} alt='' />
-                    </div>
-
-                    <div className={`dropdownMenuUser ${openMenuUser? 'active' : ''}`}>
-                        <ul>
-                            {
-                                // user.role === 'admin' ?
-                                    <Link to='/admin/dashboard'>
-                                        <DropdownItem icon={<DashboardIcon />} text = {"Dashboard"}/>
+                {
+                    isAuthenticated === true ?
+                        <div className='menu-container'>
+                            <div className='imgUser' onClick={()=>{setOpenMenuUser(!openMenuUser)}}>
+                                <img src={user.data.user.avatar.url} alt='' />
+                            </div>
+        
+                            <div className={`dropdownMenuUser ${openMenuUser? 'active' : ''}`}>
+                                <ul>
+                                    {
+                                        user.data.user.role === 'admin' ?
+                                            <Link to='/admin/dashboard'>
+                                                <DropdownItem icon={<DashboardIcon />} text = {"Dashboard"}/>
+                                            </Link>
+                                        : null
+                                    }
+                                    <Link to='/account'>
+                                        <DropdownItem icon={<PersonIcon />} text = {"Profile"}/>
                                     </Link>
-                                // : null
-                            }
-                            <Link to='/account'>
-                                <DropdownItem icon={<PersonIcon />} text = {"Profile"}/>
-                            </Link>
-                            <Link to='/orders'>
-                                <DropdownItem icon={<ListAltIcon />} text = {"Orders"}/>
-                            </Link>
-                            <Link to='/cart'>
-                                <DropdownItem icon={<LocalMallOutlinedIcon />} text = {"Cart (0)"}/>
-                            </Link>
-                            <DropdownItem icon={<LogoutIcon onClick={logoutUser} />} text = {"Logout"}/>
-                        </ul>
-                    </div>
-                </div>
+                                    <Link to='/orders'>
+                                        <DropdownItem icon={<ListAltIcon />} text = {"Orders"}/>
+                                    </Link>
+                                    <Link to='/cart'>
+                                        <DropdownItem icon={<LocalMallOutlinedIcon />} text = {"Cart (0)"}/>
+                                    </Link>
+                                    <DropdownItem icon={<LogoutIcon onClick={logoutUser} />} text = {"Logout"}/>
+                                </ul>
+                            </div>
+                        </div>
+                    : null
+                }
             </header>
             <AnimatePresence>
                 {

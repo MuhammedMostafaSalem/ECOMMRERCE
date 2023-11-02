@@ -1,5 +1,10 @@
+import {
+    GET_ERROR,
+    UPDATE_PROFILE_FAIL,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS
+} from "../../Types";
 import { useEditDataWithImg } from "../../../Hook/useEditData";
-import { GET_ERROR, UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS } from "../../Types";
 
 // Update Profile
 export const updateProfile = (userData) => async (dispatch) => {

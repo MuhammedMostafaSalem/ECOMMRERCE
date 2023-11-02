@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { clearErrors, loginUser } from '../../Redux/Actions/Auth/AuthActions';
 import { useNavigate } from 'react-router-dom';
+import Cookie from 'cookie-universal'
 
 const LoginHook = () => {
+    const cookies = Cookie()
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -60,6 +62,7 @@ const LoginHook = () => {
         if(user) {
             // console.log(user)
             if(user.data) {
+                cookies.set('token', user.data.token)
                 // localStorage.setItem('token', user.data.token)
                 // localStorage.setItem('user', JSON.stringify(user.data.user))
                 toast('Logged successfully')

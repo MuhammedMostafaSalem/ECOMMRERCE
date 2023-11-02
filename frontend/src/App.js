@@ -30,8 +30,8 @@ import { useSelector } from "react-redux";
 
 function App() {
   const {isAuthenticated, user} = useSelector(state => state.AuthReducer)
-  console.log(isAuthenticated)
-  console.log(user)
+  // console.log(isAuthenticated)
+  // console.log(user)
   React.useEffect(() => {
     store.dispatch(loggedUser())
   }, [])
@@ -62,7 +62,7 @@ return (
           <Route path="/admin/reviews" element={<ReviewsAdminPage />} />
         </Route>
 
-        <Route path="/account" element={<ProfilePage />} />
+        <Route path="/account" element={<ProfilePage user={user} />} />
         <Route path="/account/update" element={<UpdateProfilePage />} />
         <Route path="/password/update" element={<UpdatePasswordPage />} />
         <Route path="/orders" element={<OrderUserPage />} />

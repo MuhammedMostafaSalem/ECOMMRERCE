@@ -3,8 +3,10 @@ import { clearErrors, register } from '../../Redux/Actions/Auth/AuthActions';
 import Profile from '../../images/Profile.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import Cookie from 'cookie-universal'
 
 const RegisterHook = () => {
+    const cookies = Cookie()
     const dispatch = useDispatch();
     const [userDate, setUserDate] = useState({
         name: "",
@@ -89,6 +91,7 @@ const RegisterHook = () => {
             // console.log(user)
             // When user data is entered for the first time
             if(user.status === 'success') {
+                cookies.set('token', user.token);
                 // localStorage.setItem('token', user.token);
                 toast('Register Successfully');
                 setTimeout(() => {
