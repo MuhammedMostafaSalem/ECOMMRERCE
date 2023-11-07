@@ -5,25 +5,75 @@ const sendEmail = require("../utils/sendEmail");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../model/userModel");
 const cloudinary = require("cloudinary");
+const { uploadSingleImage } = require("../middleware/imageUpload");
+const asyncHandler = require('express-async-handler');
+const {v4: uuidv4} = require("uuid");
+const sharp = require("sharp");
+const multer = require('multer');
+
+
+// exports.uploadUserImage = uploadSingleImage('image');
+// Resize image
+// exports.resizeImage = asyncHandler(async (req, res, next) => {
+//     if (!req.file) return next();
+
+//     const ext = req.file.mimetype.split('/')[1];
+//     const filename = `user-${uuidv4()}-${Date.now()}.${ext}`;
+
+//     await sharp(req.file.buffer).toFile(`uploads/users/${filename}`);
+
+//     req.body.avatar = filename;
+//     next();
+// })
+
+
+
+// Storage
+const multerStorage = multer.memoryStorage();
+// Accept only images
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith('image')) {
+        cb(null, true);
+    } else {
+        cb(new ErrorHandler('only images allowed', 400), false);
+    }
+}
+
+const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
+exports.uploadUserImage = upload.fields([
+    { name: 'avatar', maxCount: 1 },
+]);
+
+exports.resizeImage = asyncHandler(async (req, res, next) => {
+    if (req.files.avatar) {
+        const ext = req.files.avatar[0].mimetype.split('/')[1];
+        const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
+
+        await sharp(req.files.avatar[0].buffer)
+            .toFile(`uploads/users/${avatarFilename}`); // write into a file on the disk
+
+        // Save imageCover into database
+        req.body.avatar = avatarFilename;
+    }
+
+    next();
+});
 
 
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-        folder: "avatars",
-        width: 150,
-        crop: "scale",
-    });
-    const { name, email, password } = req.body;
+    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //     folder: "avatars",
+    //     width: 150,
+    //     crop: "scale",
+    // });
+    const { name, email, password, avatar } = req.body;
 
     const user = await User.create({
         name,
         email,
         password,
-        avatar: {
-            public_id: myCloud.public_id,
-            url: myCloud.secure_url,
-        },
+        avatar,
     });
 
     sendToken(user, 201, res);

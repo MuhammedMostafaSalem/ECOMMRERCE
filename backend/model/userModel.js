@@ -25,15 +25,19 @@ const userSchema = new mongoose.Schema({
         minLength: [8, "Password should be greater than 8 characters"],
         select: false,
     },
+    // avatar: {
+    //     public_id: {
+    //         type: String,
+    //         required: true,
+    //     },
+    //     url: {
+    //         type: String,
+    //         required: true,
+    //     },
+    // },
     avatar: {
-        public_id: {
-            type: String,
-            required: true,
-        },
-        url: {
-            type: String,
-            required: true,
-        },
+        type: String,
+        required: [true, 'user avatar is required'],
     },
     role: {
         type: String,
@@ -48,6 +52,18 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpire: Date,
 });
 
+const setImageUrl = (doc) => {
+    if (doc.avatar) {
+        const imageUrl = `${process.env.BASE_URL}/users/${doc.avatar}`;
+        doc.avatar = imageUrl;
+    }
+};
+userSchema.post('init', (doc) => {
+    setImageUrl(doc);
+});
+userSchema.post('save', (doc) => {
+    setImageUrl(doc);
+});
 
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {

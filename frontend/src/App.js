@@ -22,20 +22,19 @@ import ProfilePage from "./Page/User/ProfilePage";
 import UpdateProfilePage from "./Page/User/UpdateProfilePage";
 import OrderUserPage from "./Page/User/OrderUserPage";
 import UpdatePasswordPage from "./Page/User/UpdatePasswordPage";
-import React from "react";
-import WebFont from "webfontloader";
-import store from "./Redux/Store";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loggedUser } from "./Redux/Actions/Auth/AuthActions";
-import { useSelector } from "react-redux";
 
 function App() {
-  const {isAuthenticated, user} = useSelector(state => state.AuthReducer)
-  // console.log(isAuthenticated)
-  // console.log(user)
-  React.useEffect(() => {
-    store.dispatch(loggedUser())
+  const dispatch = useDispatch();
+  const {isAuthenticated, user, error} = useSelector(state => state.AuthReducer)
+console.log(isAuthenticated)
+console.log(user)
+console.log(error)
+  useEffect(() => {
+    dispatch(loggedUser())
   }, [])
-  // window.addEventListener("contextmenu", (e) => e.preventDefault());
 return (
   <div className="App">
     <BrowserRouter>

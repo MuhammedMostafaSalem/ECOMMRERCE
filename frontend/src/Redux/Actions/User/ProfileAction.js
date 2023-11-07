@@ -11,16 +11,16 @@ export const updateProfile = (userData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PROFILE_REQUEST });
 
-        const res = await useEditDataWithImg(`/api/v1/users/updateMe`, userData)
+        const { data } = await useEditDataWithImg(`/api/v1/users/updateMe`, userData)
 
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,
-            payload: res
+            payload: data
         });
     } catch(e) {
         dispatch({
             type: UPDATE_PROFILE_FAIL,
-            payload: e.res,
+            payload: e.response,
         });
     }
 }

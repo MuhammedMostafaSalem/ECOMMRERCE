@@ -63,17 +63,16 @@ const LoginHook = () => {
             // console.log(user)
             if(user.data) {
                 cookies.set('token', user.data.token)
-                // localStorage.setItem('token', user.data.token)
-                // localStorage.setItem('user', JSON.stringify(user.data.user))
                 toast('Logged successfully')
                 setTimeout(() => {
                     setEmail("")
                     setPassword("")
                 }, 1000)
                 setTimeout(() => {
-                    // window.location.pathname = '/'
                     navigate('/')
                 }, 2000);
+            } else {
+                cookies.remove('token')
             }
         }
     }, [error, user, dispatch, navigate])

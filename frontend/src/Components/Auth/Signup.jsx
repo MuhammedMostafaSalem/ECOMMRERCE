@@ -7,7 +7,19 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import RegisterHook from '../../Hooks/Auth/RegisterHook';
 
 const Register = ({registerTab}) => {
-    const [name, email, password, avatarPreview, registerSubmit, registerDataChange, errors] = RegisterHook();
+    // const [name, email, password, avatarPreview, registerSubmit, registerDataChange, errors] = RegisterHook();
+    const [
+        name,
+        onNameChange,
+        email,
+        onEmailChange,
+        password,
+        onPasswordChange,
+        avatar,
+        onImageChange,
+        registerSubmit,
+        errors
+    ] = RegisterHook();
     
     // for show and hide password
     const [showshowPass, setShowPass] = useState(false)
@@ -30,7 +42,7 @@ const Register = ({registerTab}) => {
                     required
                     name="name"
                     value={name}
-                    onChange={registerDataChange}
+                    onChange={onNameChange}
                 />
             </div>
             <div className="signUpEmail">
@@ -41,7 +53,7 @@ const Register = ({registerTab}) => {
                     required
                     name="email"
                     value={email}
-                    onChange={registerDataChange}
+                    onChange={onEmailChange}
                 />
             </div>
             <div className="signUpPassword">
@@ -52,7 +64,7 @@ const Register = ({registerTab}) => {
                     required
                     name="password"
                     value={password}
-                    onChange={registerDataChange}
+                    onChange={onPasswordChange}
                 />
                 {
                     showshowPass ? <VisibilityOffIcon onClick={handleShowPass} className='iconShow' />
@@ -60,12 +72,12 @@ const Register = ({registerTab}) => {
                 }
             </div>
             <div id="registerImage">
-                <img src={avatarPreview} alt="Avatar Preview" />
+                <img src={avatar} alt="Avatar Preview" />
                 <input
                     type="file"
                     name="avatar"
                     accept="image/*"
-                    onChange={registerDataChange}
+                    onChange={onImageChange}
                 />
             </div>
 

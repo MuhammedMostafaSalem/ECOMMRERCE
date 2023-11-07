@@ -1,18 +1,34 @@
 import React from 'react'
 import './User.css'
 import { Link } from 'react-router-dom'
-import Profile from "../../images/Profile.png"
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { loggedUser } from '../../Redux/Actions/Auth/AuthActions'
 
 const ProfilePage = ({user}) => {
-    // const user = JSON.parse(localStorage.getItem("user"));
-    let resUser = []
+    const dispatch = useDispatch();
+
+    let userIn = []
+    let userAvatar = []
     try {
-        if(user.data) {
-            resUser = user.data;
-        } else {
-            resUser = []
+        if(user.user) {
+            userIn = user.user;
+        }
+        if(user.user.avatar.url) {
+            userAvatar = user.user.avatar.url;
+        }
+        else {
+            userIn = []
+            userAvatar = []
         }
     } catch(e) {}
+
+    useEffect(() => {
+        dispatch(loggedUser())
+    }, [dispatch])
+
+    // const user = JSON.parse(localStorage.getItem("user"));
+
 
     return (
         <div className='divContainer'>
@@ -20,7 +36,7 @@ const ProfilePage = ({user}) => {
                 <div className='myProfile'>
                     <h1>My Profile</h1>
                     <div className='ProfileImg'>
-                        <img src={resUser.user.avatar.url} alt='' />
+                        <img src={userAvatar} alt='' />
                     </div>
                     <Link to="/account/update">Edit Profile</Link>
                 </div>
@@ -28,15 +44,15 @@ const ProfilePage = ({user}) => {
                 <div className='userInfo'>
                     <div className='info'>
                         <h4>Full Name</h4>
-                        <p>{resUser.user.name}</p>
+                        <p>{userIn.name}</p>
                     </div>
                     <div className='info'>
                         <h4>Email</h4>
-                        <p>{resUser.user.email}</p>
+                        <p>{userIn.email}</p>
                     </div>
                     <div className='info'>
                         <h4>Joined On</h4>
-                        <p>{String(resUser.user.createdAt).substring(0, 10)}</p>
+                        <p>{String(userIn.createdAt).substring(0, 10)}</p>
                     </div>
     
                     <div className='btnGroup'>

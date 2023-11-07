@@ -5,7 +5,16 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import UpdateProfileHook from '../../Hooks/User/UpdateProfileHook';
 
 const UpdateProfilePage = () => {
-    const [name, onChangeName, email, onChangeEmail, updateProfileSubmit, updateProfileDataChange, avatarPreview, errors] = UpdateProfileHook();
+    const [
+        name,
+        onChangeName,
+        email,
+        onChangeEmail,
+        updateProfileSubmit,
+        updateProfileDataChange,
+        avatarPreview,
+        errors
+    ] = UpdateProfileHook();
 
     return (
         <div className='divContainer'>

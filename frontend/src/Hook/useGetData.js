@@ -10,11 +10,11 @@ const useGetDataToken = async(url, params) => {
     const cookies = Cookie();
     const config = {
         headers: {
-            // Authorization: `Bearer ${localStorage.getItem("token")}`
+            // Authorization: `Bearer ${localStorage.getItem('token')}`
             Authorization: "Bearer " + cookies.get('token')
         }
     }
-    const res = await baseURL.get(url, params, config);
+    const res = await baseURL.get(url, config);
     return res;
 }
 

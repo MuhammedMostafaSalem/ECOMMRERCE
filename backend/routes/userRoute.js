@@ -8,13 +8,19 @@ const {
     updateUserRole, deleteUser
 } = require("../controller/userController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
+const { uploadUserImage, resizeImage } = require("../controller/authController");
 const router = express.Router();
 
 
 // logged user
 router.route("/users/getMe").get(isAuthenticatedUser, getUserDetails);
 router.route("/users/changeMyPassword").put(isAuthenticatedUser, updatePassword);
-router.route("/users/updateMe").put(isAuthenticatedUser, updateProfile);
+router.route("/users/updateMe").put(
+    isAuthenticatedUser,
+    uploadUserImage,
+    resizeImage,
+    updateProfile
+);
 
 
 // users (admin)

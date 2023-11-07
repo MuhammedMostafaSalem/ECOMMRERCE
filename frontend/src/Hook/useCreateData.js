@@ -7,8 +7,9 @@ const useCreateDataWithImg = async(url, params) => {
     const config = {
         headers: {
             "Content-Type": "multipart/form-data",
+            // Authorization: `Bearer ${cookieRes}`,
             Authorization: `Bearer ${cookieRes}`,
-            withCredentials: true
+            // Authorization: `Bearer ${localStorage.getItem('token')}`
         }
     }
     const res = await baseURL.post(url, params, config);
@@ -21,8 +22,9 @@ const useCreateData = async(url, params) => {
     const config = {
         headers: {
             "Content-Type": "application/json",
+            // Authorization: `Bearer ${cookieRes}`,
             Authorization: `Bearer ${cookieRes}`,
-            withCredentials: true
+            // Authorization: `Bearer ${localStorage.getItem('token')}`
         }
     }
     const res = await baseURL.post(url, params, config);

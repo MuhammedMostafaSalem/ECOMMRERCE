@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import Profile from "../../images/Profile.png"
 import { clearErrors, updateProfile } from "../../Redux/Actions/User/ProfileAction";
-import { loggedUser } from "../../Redux/Actions/Auth/AuthActions";
 import { useNavigate } from "react-router-dom";
 import { UPDATE_PROFILE_RESET } from "../../Redux/Types";
+import { loggedUser } from "../../Redux/Actions/Auth/AuthActions";
 
 const UpdateProfileHook = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+    
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [avatar, setAvatar] = useState(Profile);
     const [avatarPreview, setAvatarPreview] = useState(Profile);
     const [errors, setErrors] = useState('');
@@ -61,14 +62,30 @@ const UpdateProfileHook = () => {
         reader.readAsDataURL(e.target.files[0]);
     }
 
-    const { isUpdated, error } = useSelector((state) => state.ProfileReducer);
-    // const { user } = useSelector((state) => state.AuthReducer);
+    const { error, isUpdated, loading } = useSelector((state) => state.ProfileReducer);
+    const { user } = useSelector((state) => state.AuthReducer);
+
+    let userIn = []
+    let userAvatar = []
+    try {
+        if(user.user) {
+            userIn = user.user;
+        }
+        if(user.user.avatar.url) {
+            userAvatar = user.user.avatar.url;
+        }
+        else {
+            userIn = []
+            userAvatar = []
+        }
+    } catch(e) {}
 
     useEffect(() => {
-        // if(user) {
-        //     console.log(user)
-        // }
-
+        if(user) {
+        setName(userIn.name)
+        setEmail(userIn.email)
+        setAvatarPreview(userAvatar)
+        }
         if (error) {
             console.log(error);
             dispatch(clearErrors());
@@ -76,6 +93,8 @@ const UpdateProfileHook = () => {
 
         if(isUpdated) {
             console.log(isUpdated)
+
+            dispatch(loggedUser())
 
             setTimeout(() => {
                 setName('')
@@ -91,9 +110,18 @@ const UpdateProfileHook = () => {
                 type: UPDATE_PROFILE_RESET,
             });
         }
-    }, [isUpdated, error, dispatch])
+    }, [isUpdated, error, dispatch, navigate, user])
     
-    return [name, onChangeName, email, onChangeEmail, updateProfileSubmit, updateProfileDataChange, avatarPreview, errors]
+    return [
+        name,
+        onChangeName,
+        email,
+        onChangeEmail,
+        updateProfileSubmit,
+        updateProfileDataChange,
+        avatarPreview,
+        errors
+    ]
 }
 
 export default UpdateProfileHook

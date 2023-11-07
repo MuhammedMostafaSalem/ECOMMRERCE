@@ -1,5 +1,5 @@
 import { useCreateData, useCreateDataWithImg } from "../../../Hook/useCreateData"
-import { useGetData, useGetDataToken } from "../../../Hook/useGetData";
+import { useGetDataToken } from "../../../Hook/useGetData";
 import { LOGOUT_FAIL, REGISTER_USER_SUCCESS, REGISTER_USER_REQUEST, REGISTER_USER_FAIL, GET_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGGED_USER_REQUEST, LOGGED_USER_SUCCESS, LOGGED_USER_FAIL, LOGOUT_SUCCESS } from "../../Types";
 
 // Register

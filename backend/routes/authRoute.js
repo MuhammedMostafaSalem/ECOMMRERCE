@@ -4,12 +4,18 @@ const {
     loginUser,
     logout,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    uploadUserImage,
+    resizeImage
 } = require("../controller/authController");
 const router = express.Router();
 
 
-router.route("/register").post(registerUser);
+router.route("/register").post(
+    uploadUserImage,
+    resizeImage,
+    registerUser
+);
 router.route("/login").post(loginUser);
 router.route("/password/forgot").post(forgotPassword);
 router.route("/logout").get(logout);

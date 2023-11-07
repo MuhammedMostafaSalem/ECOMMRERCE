@@ -4,6 +4,7 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../model/userModel");
+const cloudinary = require("cloudinary");
 
 
 // Get User Detail
@@ -44,26 +45,8 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,
         email: req.body.email,
+        avatar: req.body.avatar,
     };
-
-    if (req.body.avatar !== "") {
-        const user = await User.findById(req.user.id);
-    
-        const imageId = user.avatar.public_id;
-    
-        await cloudinary.v2.uploader.destroy(imageId);
-
-        const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-            folder: "avatars",
-            width: 150,
-            crop: "scale",
-        });
-
-        newUserData.avatar = {
-            public_id: myCloud.public_id,
-            url: myCloud.secure_url,
-        };
-    }
 
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new: true,
@@ -109,8 +92,8 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
 // update User Role -- Admin
 exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
-        name: req.body.name,
-        email: req.body.email,
+        // name: req.body.name,
+        // email: req.body.email,
         role: req.body.role,
     };
 

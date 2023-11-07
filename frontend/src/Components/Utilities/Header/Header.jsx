@@ -12,18 +12,40 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { toast } from 'react-toastify';
-// import Profile from '../../../images/Profile.png'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from '../../../Redux/Actions/Auth/AuthActions';
 import Cookie from 'cookie-universal'
 
 const Header = ({isAuthenticated, user}) => {
     const cookies = Cookie();
     const dispatch = useDispatch();
+    // const [user, setUser] = useState('');
+    // useEffect(() => {
+    //     if (cookies.get('user') != null) {
+    //         setUser(cookies.get('user'))
+    //     }
+    // },[])
+
+    let userIn = []
+    let userAvatar = []
+    try {
+        if(user.user) {
+            userIn = user.user;
+        }
+        if(user.user.avatar) {
+            userAvatar = user.user.avatar;
+        }
+        else {
+            userIn = []
+            userAvatar = []
+        }
+    } catch(e) {}
 
     const logoutUser = async() => {
         await dispatch(logout());
         cookies.remove('token');
+        // cookies.remove('user');
+        // setUser('')
         toast("Logged Out Successfully");
     }
     
@@ -75,13 +97,13 @@ const Header = ({isAuthenticated, user}) => {
                     isAuthenticated === true ?
                         <div className='menu-container'>
                             <div className='imgUser' onClick={()=>{setOpenMenuUser(!openMenuUser)}}>
-                                <img src={user.data.user.avatar.url} alt='' />
+                                <img src={userAvatar} alt='' />
                             </div>
         
                             <div className={`dropdownMenuUser ${openMenuUser? 'active' : ''}`}>
                                 <ul>
                                     {
-                                        user.data.user.role === 'admin' ?
+                                        userIn.role === 'admin' ?
                                             <Link to='/admin/dashboard'>
                                                 <DropdownItem icon={<DashboardIcon />} text = {"Dashboard"}/>
                                             </Link>
