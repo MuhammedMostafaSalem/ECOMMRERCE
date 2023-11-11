@@ -69,7 +69,8 @@ const LoginHook = () => {
                     setPassword("")
                 }, 1000)
                 setTimeout(() => {
-                    navigate('/')
+                    window.location.href = '/'
+                    // navigate('/')
                 }, 2000);
             } else {
                 cookies.remove('token')

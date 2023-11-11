@@ -5,6 +5,7 @@ import { clearErrors, updateProfile } from "../../Redux/Actions/User/ProfileActi
 import { useNavigate } from "react-router-dom";
 import { UPDATE_PROFILE_RESET } from "../../Redux/Types";
 import { loggedUser } from "../../Redux/Actions/Auth/AuthActions";
+import { toast } from "react-toastify";
 
 const UpdateProfileHook = () => {
     const navigate = useNavigate()
@@ -13,7 +14,7 @@ const UpdateProfileHook = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [avatar, setAvatar] = useState(Profile);
-    const [avatarPreview, setAvatarPreview] = useState(Profile);
+    const [selectedFile, setSelectedFile] = useState(null)
     const [errors, setErrors] = useState('');
 
     const onChangeName = (e) => {
@@ -21,6 +22,13 @@ const UpdateProfileHook = () => {
     }
     const onChangeEmail = (e) => {
         setEmail(e.target.value);
+    }
+    // when image change save it
+    const onImageChange = (e) => {
+        if(e.target.files && e.target.files[0]) {
+            setAvatar(URL.createObjectURL(e.target.files[0]))
+            setSelectedFile(e.target.files[0])
+        }
     }
 
     const validationValues = () => {
@@ -32,10 +40,10 @@ const UpdateProfileHook = () => {
             setErrors('Please enter your new email')
             return;
         }
-        if(avatar === Profile) {
-            setErrors('Please enter your personal iamge')
-            return;
-        }
+        // if(avatar === Profile) {
+        //     setErrors('Please enter your personal iamge')
+        //     return;
+        // }
     }
 
     const updateProfileSubmit = (e) => {
@@ -45,22 +53,22 @@ const UpdateProfileHook = () => {
         const myForm = new FormData();
         myForm.append("name", name);
         myForm.append("email", email);
-        myForm.append("avatar", avatar);
+        myForm.append("avatar", selectedFile);
 
         dispatch(updateProfile(myForm));
     }
 
-    const updateProfileDataChange = (e) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setAvatarPreview(reader.result);
-                setAvatar(reader.result);
-            }
-        }
+    // const updateProfileDataChange = (e) => {
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //         if (reader.readyState === 2) {
+    //             setAvatarPreview(reader.result);
+    //             setAvatar(reader.result);
+    //         }
+    //     }
 
-        reader.readAsDataURL(e.target.files[0]);
-    }
+    //     reader.readAsDataURL(e.target.files[0]);
+    // }
 
     const { error, isUpdated, loading } = useSelector((state) => state.ProfileReducer);
     const { user } = useSelector((state) => state.AuthReducer);
@@ -71,8 +79,8 @@ const UpdateProfileHook = () => {
         if(user.user) {
             userIn = user.user;
         }
-        if(user.user.avatar.url) {
-            userAvatar = user.user.avatar.url;
+        if(user.user.avatar) {
+            userAvatar = user.user.avatar;
         }
         else {
             userIn = []
@@ -84,7 +92,7 @@ const UpdateProfileHook = () => {
         if(user) {
         setName(userIn.name)
         setEmail(userIn.email)
-        setAvatarPreview(userAvatar)
+        setAvatar(userAvatar)
         }
         if (error) {
             console.log(error);
@@ -93,13 +101,13 @@ const UpdateProfileHook = () => {
 
         if(isUpdated) {
             console.log(isUpdated)
-
+            toast('Updated profile successfully')
             dispatch(loggedUser())
 
             setTimeout(() => {
                 setName('')
                 setEmail('')
-                setAvatarPreview(Profile)
+                setAvatar(Profile)
             }, 1000)
 
             setTimeout(() => {
@@ -117,9 +125,9 @@ const UpdateProfileHook = () => {
         onChangeName,
         email,
         onChangeEmail,
+        avatar,
+        onImageChange,
         updateProfileSubmit,
-        updateProfileDataChange,
-        avatarPreview,
         errors
     ]
 }

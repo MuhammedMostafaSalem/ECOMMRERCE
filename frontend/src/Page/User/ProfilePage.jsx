@@ -14,8 +14,8 @@ const ProfilePage = ({user}) => {
         if(user.user) {
             userIn = user.user;
         }
-        if(user.user.avatar.url) {
-            userAvatar = user.user.avatar.url;
+        if(user.user.avatar) {
+            userAvatar = user.user.avatar;
         }
         else {
             userIn = []

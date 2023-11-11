@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -12,6 +13,10 @@ app.use(express.json());
 app.use(cookieParser());
 // app.use(bodyParser.urlencoded({extended: true}));
 // app.use(fileUpload());
+
+// Parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+app.use(express.static(path.join(__dirname, "uploads")));
 app.use(cors());
 app.options("*", cors());
 

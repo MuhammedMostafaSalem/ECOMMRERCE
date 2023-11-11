@@ -10,9 +10,9 @@ const UpdateProfilePage = () => {
         onChangeName,
         email,
         onChangeEmail,
+        avatar,
+        onImageChange,
         updateProfileSubmit,
-        updateProfileDataChange,
-        avatarPreview,
         errors
     ] = UpdateProfileHook();
 
@@ -48,12 +48,12 @@ const UpdateProfilePage = () => {
                         </div>
 
                         <div id="updateProfileImage">
-                            <img src={avatarPreview} alt="Avatar Preview" />
+                            <img src={avatar} alt="Avatar Preview" />
                             <input
                                 type="file"
                                 name="avatar"
                                 accept="image/*"
-                                onChange={updateProfileDataChange}
+                                onChange={onImageChange}
                             />
                         </div>
                         <input
