@@ -1,14 +1,4 @@
-export const REGISTER = 'REGISTER';
-export const LOGIN_USER = 'LOGIN_USER';
-export const LOGGED_USER = 'LOGGED_USER';
-export const LOGOUT = 'LOGOUT';
-// export const LOGOUT_FAIL = 'LOGOUT_FAIL';
-
-
-
-
-
-
+// types auth, user and admon
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
@@ -58,5 +48,13 @@ export const ALL_USERS_FAIL = "ALL_USERS_FAIL";
 
 export const USER_DETAILS_SUCCESS = "USER_DETAILS_SUCCESS";
 export const UPDATE_USER_ROLE_ADMIN = "UPDATE_USER_ROLE_ADMIN";
+
+
+
+
+
+// types category
+export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
+
 
 export const GET_ERROR = "GET_ERROR"
