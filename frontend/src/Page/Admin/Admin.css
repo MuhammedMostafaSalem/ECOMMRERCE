@@ -157,6 +157,10 @@
 .productListContainer .categoryItems td:nth-child(2) {
     text-align: center;
 }
+.productListContainer .categoryItems img {
+    width: 75px;
+    height: 75px;
+}
 
 
 
