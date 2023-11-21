@@ -28,13 +28,12 @@ import { loggedUser } from "./Redux/Actions/Auth/AuthActions";
 
 function App() {
   const dispatch = useDispatch();
-  const {isAuthenticated, user, error} = useSelector(state => state.AuthReducer)
-console.log(isAuthenticated)
-console.log(user)
-console.log(error)
+  const {isAuthenticated, user} = useSelector(state => state.AuthReducer)
+
   useEffect(() => {
     dispatch(loggedUser())
   }, [])
+  
 return (
   <div className="App">
     <BrowserRouter>
@@ -52,7 +51,7 @@ return (
         <Route path="/password/forgot" element={<ForgotpasswordPage />} />
         <Route path="/password/reset/:token" element={<ResetpasswordPage />} />
 
-        <Route path="/admin" element={<SideBar />}>
+        <Route path="/admin" element={<SideBar isAuthenticated={isAuthenticated} user={user}  />}>
           <Route path="/admin/dashboard" element={<DashboardPage />} />
           <Route path="/admin/categories" element={<CategoryAdminPage />} />
           <Route path="/admin/products" element={<ProductsAdminPage />} />

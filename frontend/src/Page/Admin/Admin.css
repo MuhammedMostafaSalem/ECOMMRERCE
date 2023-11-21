@@ -27,9 +27,27 @@
     border-radius: 10px;
     padding: 5px;
     cursor: url(../../images/pointer.png), auto;
+    height: 40px;
 }
 .toggled {
     display: none;
+}
+
+.dropdown-menu-admin #dropdown-basic {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: #000;
+}
+.dropdown-menu-admin #dropdown-basic::after {
+    display: none;
+}
+.dropdown-menu-admin .dropdown-menu {
+    padding: 3px;
+    font: 200 1rem "Roboto" !important;
+}
+.dropdown-menu-admin .dropdown-menu .dropdown-item:hover {
+    background-color: #e2e5e7;
 }
 
 @media (max-width: 767px) {
@@ -43,6 +61,7 @@
         border-radius: 10px;
         padding: 5px;
         cursor: url(../../images/pointer.png), auto;
+        height: 40px;
     }
     .bar1 {
         display: none;
@@ -316,4 +335,17 @@
 .productReviewsContainer th:nth-child(4),
 .productReviewsContainer td:nth-child(4) {
     text-align: center;
+}
+
+
+.iconUsersAdmin,
+.user-admin-btn {
+    cursor: url(../../images/pointer.png), auto;
+}
+.user-admin-btn {
+    margin: 0 3px;
+}
+
+.getOneUserPage img {
+    width: 60%;
 }

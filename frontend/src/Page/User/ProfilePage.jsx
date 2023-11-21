@@ -27,9 +27,6 @@ const ProfilePage = ({user}) => {
         dispatch(loggedUser())
     }, [dispatch])
 
-    // const user = JSON.parse(localStorage.getItem("user"));
-
-
     return (
         <div className='divContainer'>
             <div className="profileContainer">

@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import GetAllUsersAdminHook from '../../../Hooks/Admin/Users/GetAllUsersAdminHook';
 
 const DashboardSummary = () => {
+    const [itemsUsers, loading] = GetAllUsersAdminHook();
+    
     return (
         <div className='dashboardSummary'>
             <div>
@@ -20,7 +23,7 @@ const DashboardSummary = () => {
                 </Link>
                 <Link to="/admin/users">
                     <p>Users</p>
-                    <p>2</p>
+                    <p>{itemsUsers.length}</p>
                 </Link>
             </div>
         </div>

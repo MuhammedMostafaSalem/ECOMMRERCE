@@ -126,19 +126,22 @@
 
 /* start UpdateProfile page */
 .updateProfileContainer {
-    display: flex;
-    height: 100vh;
+    width: 100vw !important;
+    height: 92vh !important;
+    max-width: 100% !important; 
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 .updateProfileContainer .updateProfileBox {
-    background-color: #fbf8f8;
+    background-color: var(--White-color);
+    width: 421px;
+    height: 56vh;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    padding: 20px 0;
-    border-radius: 10px;
-    box-shadow: 4px 0 4px #e1e1e1;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #d8d7d7;
+    padding: 5px;
 }
 .updateProfileContainer .updateProfileHeading {
     text-align: center;
@@ -167,25 +170,23 @@
     align-items: center;
 }
 .updateProfileContainer .updateProfileForm > div > input {
-    padding: 1vmax 4vmax;
-    padding-right: 1vmax;
+    padding: 10px 40px;
     width: 100%;
     box-sizing: border-box;
     border: 1px solid rgba(0, 0, 0, 0.267);
     border-radius: 4px;
-    font: 300 0.9vmax cursive;
+    font: 500 12px cursive;
     outline: none;
 }
 .updateProfileContainer .updateProfileForm > div > svg {
     position: absolute;
-    transform: translateX(1vmax);
-    font-size: 1.6vmax;
+    transform: translateX(10px);
+    font-size: 20px;
     color: rgba(0, 0, 0, 0.623);
 }
 .updateProfileContainer #updateProfileImage > img {
-    width: 3vmax;
+    width: 3rem;
     border-radius: 100%;
-    margin: 1vmax;
 }
 .updateProfileContainer #updateProfileImage > input {
     display: flex;
@@ -198,7 +199,7 @@
     height: 5vh;
     border: none;
     margin: 0%;
-    font: 400 0.8vmax cursive;
+    font: 400 10px cursive;
     transition: all 0.5s;
     padding: 0 1vmax;
     color: rgba(0, 0, 0, 0.623);

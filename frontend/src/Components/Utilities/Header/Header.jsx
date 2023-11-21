@@ -19,12 +19,6 @@ import Cookie from 'cookie-universal'
 const Header = ({isAuthenticated, user}) => {
     const cookies = Cookie();
     const dispatch = useDispatch();
-    // const [user, setUser] = useState('');
-    // useEffect(() => {
-    //     if (cookies.get('user') != null) {
-    //         setUser(cookies.get('user'))
-    //     }
-    // },[])
 
     let userIn = []
     let userAvatar = []
@@ -44,8 +38,7 @@ const Header = ({isAuthenticated, user}) => {
     const logoutUser = async() => {
         await dispatch(logout());
         cookies.remove('token');
-        // cookies.remove('user');
-        // setUser('')
+
         toast("Logged Out Successfully");
     }
     

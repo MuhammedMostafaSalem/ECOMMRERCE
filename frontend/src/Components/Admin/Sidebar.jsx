@@ -7,12 +7,19 @@ import PeopleIcon from '@mui/icons-material/People';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../../images/logo.png'
-import userIcon from '../../images/user-icon.png'
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
+import { Dropdown } from 'react-bootstrap';
+import Cookie from 'cookie-universal'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../Redux/Actions/Auth/AuthActions';
+import { toast } from 'react-toastify';
 
-const SideBar = ({children}) => {
+const SideBar = ({children, isAuthenticated, user}) => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const cookies = Cookie();
+    const dispatch = useDispatch();
 
 
     // for open and close sidebar
@@ -28,6 +35,16 @@ const SideBar = ({children}) => {
         }
         document.addEventListener('mousedown', handler);
     })
+
+
+    const logoutUser = async() => {
+        await dispatch(logout());
+        cookies.remove('token');
+        setTimeout(() => {
+            navigate("/")
+        }, 1000)
+        toast("Logged Out Successfully");
+    }
 
     return (
         <div className='d-flex' style={{backgroundColor: '#f9f9f9'}}>
@@ -108,9 +125,23 @@ const SideBar = ({children}) => {
                     <div className='bar2 toggled' onClick={toggled}>
                         <MenuIcon/>
                     </div>
-                    <div>
-                        <img style={{width: '40px'}} src={userIcon} alt=''/>
-                    </div>
+                    {
+                        isAuthenticated === true ?
+                            // <div>
+                            //     <img style={{width: '40px', height: '50px',borderRadius: '50%'}} src={user.user.avatar} alt=''/>
+                            // </div>
+
+                            <Dropdown className='dropdown-menu-admin'>
+                                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    <img style={{width: '40px', height: '50px',borderRadius: '50%'}} src={user.user.avatar} alt=''/>
+                                </Dropdown.Toggle>
+                        
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={logoutUser}>Log out</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        : null
+                    }
                 </div>
                 <Outlet />
 
