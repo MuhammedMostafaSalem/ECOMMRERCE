@@ -12,7 +12,7 @@ const GetAllSubcategoryHook = () => {
         if(subcats) {
             dispatch(getAllSubcategory())
         }
-    }, [])
+    }, [subcats])
 
     let allSubcat = []
     try {
