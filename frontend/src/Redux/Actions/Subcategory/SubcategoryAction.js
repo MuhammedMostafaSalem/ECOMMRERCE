@@ -1,6 +1,7 @@
 import { useCreateData } from "../../../Hook/useCreateData";
+import useDeleteData from "../../../Hook/useDeleteData";
 import { useGetData } from "../../../Hook/useGetData";
-import { CREATE_SUBCATEGORY, GET_ALL_SUBCATEGORY, GET_ERROR } from "../../Types";
+import { CREATE_SUBCATEGORY, DELETE_SUBCATEGORY, GET_ALL_SUBCATEGORY, GET_ERROR } from "../../Types";
 
 // create subcategory
 export const createSubategory = (formData) => async (dispatch) => {
@@ -36,3 +37,21 @@ export const getAllSubcategory = () => async(dispatch) => {
         });
     }
 }
+
+// delete subcategory
+export const deleteSubcategory = (id) => async (dispatch) => {
+    try {
+        const response = await useDeleteData(`/api/v1/subcategory/${id}`);
+
+        dispatch({
+            type: DELETE_SUBCATEGORY,
+            payload: response,
+            loading: true,
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + error
+        });
+    }
+};
