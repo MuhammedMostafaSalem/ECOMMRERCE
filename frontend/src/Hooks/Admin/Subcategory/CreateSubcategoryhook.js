@@ -35,12 +35,9 @@ const CreateSubcategoryhook = () => {
     } catch(e) {}
 
     const onChangeName = (e) => {
-        // e.persist();
-        console.log(e.target.value)
         setSubCatName(e.target.value)
     }
     const onCatIdChange = (e) => {
-        console.log(e.target.value)
         setCatId(e.target.value)
     }
 
