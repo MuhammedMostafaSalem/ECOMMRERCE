@@ -5,7 +5,8 @@ import Profile from '../../../images/Profile.png'
 import GetAllSubcategoryHook from '../../../Hooks/Admin/Subcategory/GetAllSubcategoryHook';
 import Loader from '../../Utilities/Loader/Loader';
 import DeleteSubcategoryAdminHook from '../../../Hooks/Admin/Subcategory/DeleteSubcategoryAdminHook';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
+import UpdateSubcategoryHook from '../../../Hooks/Admin/Subcategory/UpdateSubcategoryHook';
 
 const SubCategoryListAdmin = () => {
     const [allSubcat, loading] = GetAllSubcategoryHook();
@@ -16,6 +17,15 @@ const SubCategoryListAdmin = () => {
         handleShowDeleteSubcat,
         deleteSubcatHandler,
     ] = DeleteSubcategoryAdminHook();
+    const [
+        IdSubcat,
+        name,
+        onNameChange,
+        handleEditSubmit,
+        showEditSubcat,
+        handleCloseEditSubcat,
+        handleShowEditSubcat,
+    ] = UpdateSubcategoryHook();
 
     return (
         <div className='categoryItems' style={{minHeight: '593px'}}>
@@ -33,6 +43,35 @@ const SubCategoryListAdmin = () => {
                                 allSubcat.map((item, index) => {
                                     return (
                                         <tbody key={index}>
+                                            <Modal show={showEditSubcat} onHide={handleCloseEditSubcat}>
+                                                <Modal.Header>
+                                                    <Modal.Title>Update subcategory ID: {IdSubcat}</Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                    <Form>
+                                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                                            <Form.Control
+                                                                type="text"
+                                                                placeholder="Enter the new subcategory name"
+                                                                autoFocus
+                                                                value={name}
+                                                                onChange={onNameChange}
+                                                            />
+                                                        </Form.Group>
+
+                                                        <div className='d-flex gap-2 justify-content-end'>
+                                                            <Button variant="secondary" onClick={handleCloseEditSubcat}>
+                                                                Close
+                                                            </Button>
+                                                            <Button variant="primary" onClick={() => handleEditSubmit(IdSubcat)}>
+                                                            Save Changes
+                                                            </Button>
+                                                            
+                                                        </div>
+                                                    </Form>
+                                                </Modal.Body>
+                                            </Modal>
+
                                             <Modal show={showDeleteSubcat} onHide={handleCloseDeleteSubcat}>
                                                 <Modal.Body>
                                                     <h3>
@@ -60,6 +99,7 @@ const SubCategoryListAdmin = () => {
                                                 <p>
                                                     <EditIcon
                                                         className='user-admin-btn text-success'
+                                                        onClick={() => handleShowEditSubcat(item._id, item.name)}
                                                     />
                                                     <DeleteOutlineIcon
                                                         className="user-admin-btn text-danger"
