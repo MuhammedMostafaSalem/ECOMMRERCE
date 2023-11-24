@@ -1,9 +1,10 @@
+import { useCreateDataWithImg } from "../../../Hook/useCreateData";
 import { useEditDataWithImg } from "../../../Hook/useEditData";
 import { useGetData } from "../../../Hook/useGetData";
-import { DELETE_CATEGORY, GET_ALL_CATEGORIES, GET_ERROR, UPDATE_CATEGORY } from "../../Types";
+import { CREATE_CATEGORY, DELETE_CATEGORY, GET_ALL_CATEGORIES, GET_ERROR, UPDATE_CATEGORY } from "../../Types";
 import useDeleteData from './../../../Hook/useDeleteData';
 
-// getAllCategory
+// get all categories
 export const getAllCategories = () => async(dispatch) => {
     try {
         const response = await useGetData(`/api/v1/categories`);
@@ -20,7 +21,7 @@ export const getAllCategories = () => async(dispatch) => {
     }
 }
 
-// updateCategory
+// update category
 export const updateCategory = (id, data) => async (dispatch) => {
     try {
         const response = await useEditDataWithImg(`/api/v1/category/${id}`, data);
@@ -38,7 +39,7 @@ export const updateCategory = (id, data) => async (dispatch) => {
     }
 }
 
-// deleteCategory
+// delete category
 export const deleteCategory = (id) => async (dispatch) => {
     try {
         const response = await useDeleteData(`/api/v1/category/${id}`);
@@ -55,3 +56,22 @@ export const deleteCategory = (id) => async (dispatch) => {
         });
     }
 };
+
+
+// create category
+export const createCategory = (formData) => async (dispatch) => {
+    try {
+        const response = await useCreateDataWithImg(`/api/v1/category/new` , formData);
+
+        dispatch({
+            type: CREATE_CATEGORY,
+            payload: response,
+            loading: true,
+        })
+    }catch(err) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + err,
+        })
+    }
+}
