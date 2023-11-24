@@ -1,6 +1,7 @@
 import { useEditDataWithImg } from "../../../Hook/useEditData";
 import { useGetData } from "../../../Hook/useGetData";
-import { GET_ALL_CATEGORIES, GET_ERROR, UPDATE_CATEGORY } from "../../Types";
+import { DELETE_CATEGORY, GET_ALL_CATEGORIES, GET_ERROR, UPDATE_CATEGORY } from "../../Types";
+import useDeleteData from './../../../Hook/useDeleteData';
 
 // getAllCategory
 export const getAllCategories = () => async(dispatch) => {
@@ -36,3 +37,21 @@ export const updateCategory = (id, data) => async (dispatch) => {
         });
     }
 }
+
+// deleteCategory
+export const deleteCategory = (id) => async (dispatch) => {
+    try {
+        const response = await useDeleteData(`/api/v1/category/${id}`);
+
+        dispatch({
+            type: DELETE_CATEGORY,
+            payload: response,
+            loading: true,
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + error
+        });
+    }
+};
