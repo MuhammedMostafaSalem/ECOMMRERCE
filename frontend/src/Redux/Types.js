@@ -55,6 +55,7 @@ export const UPDATE_USER_ROLE_ADMIN = "UPDATE_USER_ROLE_ADMIN";
 
 // types category
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
+export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
 
 
 export const GET_ERROR = "GET_ERROR"
