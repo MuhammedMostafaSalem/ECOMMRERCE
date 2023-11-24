@@ -5,6 +5,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import UpdateCategoryHook from '../../../Hooks/Admin/Category/UpdateCategoryHook';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteCategoryAdminHook from '../../../Hooks/Admin/Category/DeleteCategoryAdminHook';
 
 const CategoriesListAdmin = () => {
     const [itemsCategory, loading] = GetAllCategoryHook();
@@ -19,6 +20,13 @@ const CategoriesListAdmin = () => {
         handleShowEditCategory,
         handleEditSubmit
     ] = UpdateCategoryHook();
+    const [
+        idCatDelet,
+        showDeleteCat,
+        handleCloseDeleteCat,
+        handleShowDeleteCat,
+        deleteCatHandler
+    ] = DeleteCategoryAdminHook();
     
     return (
         <div className='categoryItems mb-4' style={{minHeight: '593px'}}>
@@ -74,6 +82,22 @@ const CategoriesListAdmin = () => {
                                                 </Modal.Body>
                                             </Modal>
 
+                                            <Modal show={showDeleteCat} onHide={handleCloseDeleteCat}>
+                                                <Modal.Body>
+                                                    <h3>
+                                                    Are you sure you want to delete this ID ({idCatDelet})?
+                                                    </h3>
+                                                </Modal.Body>
+                                                <Modal.Footer style={{borderTop: "none"}}>
+                                                    <Button variant="danger" onClick={handleCloseDeleteCat}>
+                                                        Close
+                                                    </Button>
+                                                    <Button variant="secondary" onClick={() => deleteCatHandler(idCatDelet)}>
+                                                        Delete
+                                                    </Button>
+                                                </Modal.Footer>
+                                            </Modal>
+
 
 
                                             <td>
@@ -88,7 +112,10 @@ const CategoriesListAdmin = () => {
                                                         className='user-admin-btn text-success'
                                                         onClick={() => handleShowEditCategory(item._id, item.name, item.image)}
                                                     />
-                                                    <DeleteOutlineIcon className="user-admin-btn text-danger" />
+                                                    <DeleteOutlineIcon
+                                                        className="user-admin-btn text-danger"
+                                                        onClick={() => handleShowDeleteCat(item._id)}
+                                                    />
                                                 </p>
                                             </td>
                                         </tbody>
