@@ -9,8 +9,10 @@ const GetAllCategoryHook = () => {
     const loading = useSelector(state => state.CategoryReducer.loading);
 
     useEffect(() => {
-        dispatch(getAllCategories())
-    }, [])
+        if(categories) {
+            dispatch(getAllCategories())
+        }
+    }, [categories])
 
     let itemsCategory = []
     try {
