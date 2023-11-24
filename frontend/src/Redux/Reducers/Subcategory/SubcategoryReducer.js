@@ -1,8 +1,9 @@
-import { CREATE_SUBCATEGORY, DELETE_SUBCATEGORY, GET_ALL_SUBCATEGORY } from "../../Types";
+import { CREATE_SUBCATEGORY, DELETE_SUBCATEGORY, GET_ALL_SUBCATEGORY, UPDATE_SUBCATEGORY } from "../../Types";
 
 const initail = {
     createSubcategory: [],
     allSubcategory: [],
+    updateSubcategory: [],
     deleteSubcategory: [],
     loading: true,
 }
@@ -19,6 +20,12 @@ const SubcategoryReducer = (state=initail, action) => {
             return {
                 ...state,
                 allSubcategory: action.payload,
+                loading: false,
+            }
+        case UPDATE_SUBCATEGORY:
+            return {
+                ...state,
+                updateSubcategory: action.payload,
                 loading: false,
             }
         case DELETE_SUBCATEGORY:
