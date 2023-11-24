@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CategoryIcon from '@mui/icons-material/Category';
+import { BiSolidCategoryAlt } from "react-icons/bi";
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PeopleIcon from '@mui/icons-material/People';
@@ -77,6 +78,14 @@ const SideBar = ({children, isAuthenticated, user}) => {
                     >
                         <p>
                             <CategoryIcon /> <span>Categories</span>
+                        </p>
+                    </MenuItem>
+                    <MenuItem
+                        component={<Link to="/admin/subcategory" />}
+                        id={location.pathname === '/admin/subcategory' ? 'active' : ''}
+                    >
+                        <p>
+                            <BiSolidCategoryAlt /> <span>SubCategory</span>
                         </p>
                     </MenuItem>
                     <MenuItem
