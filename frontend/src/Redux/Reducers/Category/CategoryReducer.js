@@ -1,8 +1,9 @@
-import { GET_ALL_CATEGORIES, UPDATE_CATEGORY } from "../../Types";
+import { DELETE_CATEGORY, GET_ALL_CATEGORIES, UPDATE_CATEGORY } from "../../Types";
 
 const initail = {
     allCategories: [],
     updateCategory: [],
+    deleteCategory: [],
     loading: true,
 }
 
@@ -18,6 +19,12 @@ const CategoryReducer = (state=initail, action)  => {
             return {
                 ...state,
                 updateCategory: action.payload,
+                loading: false,
+            }
+        case DELETE_CATEGORY:
+            return {
+                ...state,
+                deleteCategory: action.payload,
                 loading: false,
             }
         default: 
