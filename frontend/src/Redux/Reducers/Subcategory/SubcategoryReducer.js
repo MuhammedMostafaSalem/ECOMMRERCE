@@ -1,7 +1,8 @@
-import { CREATE_SUBCATEGORY } from "../../Types";
+import { CREATE_SUBCATEGORY, GET_ALL_SUBCATEGORY } from "../../Types";
 
 const initail = {
     createSubcategory: [],
+    allSubcategory: [],
     loading: true,
 }
 
@@ -11,6 +12,12 @@ const SubcategoryReducer = (state=initail, action) => {
             return {
                 ...state,
                 createSubcategory: action.payload,
+                loading: false,
+            }
+        case GET_ALL_SUBCATEGORY:
+            return {
+                ...state,
+                allSubcategory: action.payload,
                 loading: false,
             }
         default: 
