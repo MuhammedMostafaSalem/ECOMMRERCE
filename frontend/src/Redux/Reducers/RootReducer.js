@@ -4,6 +4,7 @@ import ForgotPasswordReducer from './Auth/ForgotPasswordReducer';
 import ProfileReducer from './User/ProfileReducer';
 import UsersAdminReducer from "./Admin/UsersAdminReducer";
 import CategoryReducer from "./Category/CategoryReducer";
+import SubcategoryReducer from "./Subcategory/SubcategoryReducer";
 
 export default combineReducers({
     AuthReducer: AuthReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
     ProfileReducer: ProfileReducer,
     UsersAdminReducer: UsersAdminReducer,
     CategoryReducer: CategoryReducer,
+    SubcategoryReducer: SubcategoryReducer,
 })
