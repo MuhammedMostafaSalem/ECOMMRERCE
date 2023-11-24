@@ -13,6 +13,7 @@ const ShowFooter = ({children}) => {
             location.pathname === '/orders' ||
             location.pathname === '/admin/dashboard' ||
             location.pathname === '/admin/categories' ||
+            location.pathname === '/admin/subcategory' ||
             location.pathname === '/admin/products' ||
             location.pathname === '/admin/orders' ||
             location.pathname === '/admin/users' ||
