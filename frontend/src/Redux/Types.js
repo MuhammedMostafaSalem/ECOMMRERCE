@@ -64,6 +64,7 @@ export const CREATE_CATEGORY = "CREATE_CATEGORY";
 
 // types subcategory
 export const CREATE_SUBCATEGORY = "CREATE_SUBCATEGORY";
+export const GET_ALL_SUBCATEGORY = "GET_ALL_SUBCATEGORY";
 
 
 export const GET_ERROR = "GET_ERROR"
