@@ -2,39 +2,54 @@ import React from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import Profile from '../../../images/Profile.png'
+import GetAllSubcategoryHook from '../../../Hooks/Admin/Subcategory/GetAllSubcategoryHook';
+import Loader from '../../Utilities/Loader/Loader';
 
 const SubCategoryListAdmin = () => {
-    return (
-        <table>
-            <thead>
-                <th>id</th>
-                <th>name</th>
-                <th>category image</th>
-                <th className='text-end'>actions</th>
-            </thead>
+    const [allSubcat, loading] = GetAllSubcategoryHook();
+    console.log(allSubcat)
 
-            <tbody>
-                <td>
-                    <p>subID</p>
-                </td>
-                <td>
-                    <p>subNAme</p>
-                </td>
-                <td>
-                    <img style={{width: "75px", height: "75px"}} src={Profile} alt='' />
-                </td>
-                <td  className='text-end'>
-                    <p>
-                        <EditIcon
-                            className='user-admin-btn text-success'
-                        />
-                        <DeleteOutlineIcon
-                            className="user-admin-btn text-danger"
-                        />
-                    </p>
-                </td>
-            </tbody>
-        </table>
+    return (
+        <div className='categoryItems' style={{minHeight: '593px'}}>
+            {
+                loading === false ?
+                    <table>
+                        <thead>
+                            <th>id</th>
+                            <th>sucategory name</th>
+                            <th className='text-end'>actions</th>
+                        </thead>
+        
+                        {
+                            allSubcat ?
+                                allSubcat.map((item, index) => {
+                                    return (
+                                        <tbody key={index}>
+                                            <td>
+                                                <p>{item._id}</p>
+                                            </td>
+                                            <td>
+                                                <p>{item.name}</p>
+                                            </td>
+                                            <td  className='text-end'>
+                                                <p>
+                                                    <EditIcon
+                                                        className='user-admin-btn text-success'
+                                                    />
+                                                    <DeleteOutlineIcon
+                                                        className="user-admin-btn text-danger"
+                                                    />
+                                                </p>
+                                            </td>
+                                        </tbody>
+                                    )
+                                })
+                            : <h3>There are no subcategory now</h3>
+                        }
+                    </table>
+                : <Loader />
+            }
+        </div>
     )
 }
 
