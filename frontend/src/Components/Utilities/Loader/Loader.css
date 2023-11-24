@@ -1,6 +1,6 @@
 .loading {
     display: flex;
-    justify-content: center;;
+    justify-content: center;
 }
 .loading .loader {
     width: 48px;
