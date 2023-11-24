@@ -11,7 +11,6 @@ const DeleteSubcategoryAdminHook = () => {
 
     const handleCloseDeleteSubcat = () => setShowDeleteSubcat(false);
     const handleShowDeleteSubcat = (id) => {
-        console.log(id)
         setIdSubcatDelete(id)
         setShowDeleteSubcat(true);
     }
