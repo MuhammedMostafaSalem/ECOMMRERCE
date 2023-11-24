@@ -25,6 +25,7 @@ import UpdatePasswordPage from "./Page/User/UpdatePasswordPage";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedUser } from "./Redux/Actions/Auth/AuthActions";
+import SubcategoryAdminPage from "./Page/Admin/SubcategoryAdminPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ return (
         <Route path="/admin" element={<SideBar isAuthenticated={isAuthenticated} user={user}  />}>
           <Route path="/admin/dashboard" element={<DashboardPage />} />
           <Route path="/admin/categories" element={<CategoryAdminPage />} />
+          <Route path="/admin/subcategory" element={<SubcategoryAdminPage />} />
           <Route path="/admin/products" element={<ProductsAdminPage />} />
           <Route path="/admin/orders" element={<OrdersAdminPage />} />
           <Route path="/admin/users" element={<UsersAdminPage />} />
