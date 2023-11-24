@@ -60,4 +60,10 @@ export const DELETE_CATEGORY = "DELETE_CATEGORY";
 export const CREATE_CATEGORY = "CREATE_CATEGORY";
 
 
+
+
+// types subcategory
+export const CREATE_SUBCATEGORY = "CREATE_SUBCATEGORY";
+
+
 export const GET_ERROR = "GET_ERROR"
