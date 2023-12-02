@@ -145,7 +145,6 @@ const CreateProductsHook = () => {
     useEffect(() => {
         if(loading === false) {
             if(product) {
-                console.log(product)
                 setImages({})
                 setColors([])
                 setProdName('')
