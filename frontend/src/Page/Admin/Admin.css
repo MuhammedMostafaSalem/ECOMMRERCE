@@ -195,6 +195,59 @@
     font-weight: 600;
     cursor: url(../../images/pointer.png), auto;
 }
+.modalAddProd .multiImages {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.modalAddProd .multiImages input,
+.modalAddProd .multiImages textarea,
+.modalAddProd .multiImages select,
+.modalAddProd .multiImages .select__control,
+.lmMaya {
+    width: 100%;
+    border: 2px solid #e1dcdc !important;
+    border-radius: 15px !important;
+    margin-bottom: 0 !important;
+}
+.lmMaya .eJEChV {
+    max-width: 8rem;
+}
+.lmMaya .eJEChV svg {
+    margin-bottom: 0 !important;
+    cursor: url(../../images/pointer.png), auto;
+}
+.lmMaya .eJEChV .sc-Axmtr {
+    display: none !important;
+}
+.lmMaya .eJEChV div {
+    width: 59px;
+}
+.lmMaya .eJEChV .deieah svg:first-child {
+    display: none;
+}
+.lmMaya .eJEChV .deieah svg:last-child {
+    margin-left: 0 !important;
+    height: 20px !important;
+}
+.text-form {
+    color: #979797;
+    font-size: 15px;
+    letter-spacing: 0;
+}
+.color {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+.AddProdColor {
+    width: 30px;
+    height: 35px;
+    margin-top: 2px;
+    color: var(--move-color);
+    cursor: url(../../images/pointer.png), auto;
+}
 .productListContainer .reviewsItems table {
     width: 100%;
     border-collapse: collapse;
