@@ -114,7 +114,10 @@ const RegisterHook = () => {
             // console.log(user)
             // When user data is entered for the first time
             if(user.status === 'success') {
-                cookies.set('token', user.token);
+                cookies.set('token', user.token, {
+                    path: '/',
+                    maxAge: 60 * 60 * 24 * 5,
+                });
                 // localStorage.setItem('token', user.token);
                 toast('Register Successfully');
                 setTimeout(() => {

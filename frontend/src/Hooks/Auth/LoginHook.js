@@ -62,7 +62,10 @@ const LoginHook = () => {
         if(user) {
             // console.log(user)
             if(user.data) {
-                cookies.set('token', user.data.token)
+                cookies.set('token', user.data.token, {
+                    path: '/',
+                    maxAge: 60 * 60 * 24 * 5,
+                })
                 toast('Logged successfully')
                 setTimeout(() => {
                     setEmail("")
