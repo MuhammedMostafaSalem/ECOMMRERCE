@@ -69,4 +69,9 @@ export const UPDATE_SUBCATEGORY = "UPDATE_SUBCATEGORY";
 export const DELETE_SUBCATEGORY = "DELETE_SUBCATEGORY";
 
 
+
+// types product
+export const CREATE_PRODUCT = "CREATE_PRODUCT";
+
+
 export const GET_ERROR = "GET_ERROR"
