@@ -145,22 +145,24 @@ const CreateProductsHook = () => {
     useEffect(() => {
         if(loading === false) {
             if(product) {
-                setImages({})
-                setColors([])
-                setProdName('')
-                setDescription('')
-                setPrice('')
-                setQty('')
-                setCatID('')
                 if(product.status === 201) {
                     toast('Added product successfully');
                     setTimeout(() => {
-                        handleClose();
+                        setImages({})
+                        setColors([])
+                        setProdName('')
+                        setDescription('')
+                        setPrice('')
+                        // setQty('')
+                        setCatID('')
                     }, 1000)
+                    setTimeout(() => {
+                        handleClose();
+                    }, 2000)
                 }
             }
         }
-    }, [loading])
+    }, [loading, product])
 
     return [
         show,
