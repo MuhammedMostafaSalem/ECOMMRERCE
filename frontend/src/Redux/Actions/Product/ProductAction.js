@@ -1,7 +1,8 @@
 import { useCreateDataWithImg } from "../../../Hook/useCreateData";
 import useDeleteData from "../../../Hook/useDeleteData";
+import { useEditDataWithImg } from "../../../Hook/useEditData";
 import { useGetData } from "../../../Hook/useGetData";
-import { CREATE_PRODUCT, DELETE_PRODUCT, GET_ALL_PRODUCTS, GET_ERROR } from "../../Types";
+import { CREATE_PRODUCT, DELETE_PRODUCT, GET_ALL_PRODUCTS, GET_ERROR, UPDATE_PRODUCT } from "../../Types";
 
 //create product
 export const createProduct = (formData) => async (dispatch) => {
@@ -55,3 +56,21 @@ export const deleteProduct = (id) => async (dispatch) => {
         });
     }
 };
+
+// update product
+export const updateProduct = (id, data) => async (dispatch) => {
+    try {
+        const response = await useEditDataWithImg(`/api/v1/product/${id}`, data);
+        
+        dispatch({
+            type: UPDATE_PRODUCT,
+            payload: response,
+            loading: true,
+        });
+    } catch(err) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + err,
+        });
+    }
+}
