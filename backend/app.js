@@ -14,11 +14,11 @@ app.use(cookieParser());
 // app.use(bodyParser.urlencoded({extended: true}));
 // app.use(fileUpload());
 
+app.use(cors());
+app.options("*", cors());
 // Parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 app.use(express.static(path.join(__dirname, "uploads")));
-app.use(cors());
-app.options("*", cors());
 
 // Route Imports
 const product = require("./routes/productRoute");
