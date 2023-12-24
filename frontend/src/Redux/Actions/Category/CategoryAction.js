@@ -1,7 +1,7 @@
 import { useCreateDataWithImg } from "../../../Hook/useCreateData";
 import { useEditDataWithImg } from "../../../Hook/useEditData";
 import { useGetData } from "../../../Hook/useGetData";
-import { CREATE_CATEGORY, DELETE_CATEGORY, GET_ALL_CATEGORIES, GET_ERROR, UPDATE_CATEGORY } from "../../Types";
+import { CREATE_CATEGORY, DELETE_CATEGORY, GET_ALL_CATEGORIES, GET_ERROR, GET_ONE_CATEGORY, UPDATE_CATEGORY } from "../../Types";
 import useDeleteData from './../../../Hook/useDeleteData';
 
 // get all categories
@@ -67,6 +67,23 @@ export const createCategory = (formData) => async (dispatch) => {
             type: CREATE_CATEGORY,
             payload: response,
             loading: true,
+        })
+    }catch(err) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + err,
+        })
+    }
+}
+
+
+// get one category
+export const getOneCategory = (id) => async (dispatch) => {
+    try {
+        const res = await useGetData(`/api/v1/category/${id}`);
+        dispatch({
+            type: GET_ONE_CATEGORY,
+            payload: res,
         })
     }catch(err) {
         dispatch({
