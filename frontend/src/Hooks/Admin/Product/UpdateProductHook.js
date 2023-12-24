@@ -8,7 +8,7 @@ const UpdateProductHook = () => {
     const dispatch = useDispatch();
 
     const [ID, setID] = useState('')
-    const [images, setImages] = useState({});
+    const [images, setImages] = useState([]);
     const [prodName, setProdName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -158,6 +158,7 @@ const UpdateProductHook = () => {
         setTimeout(async() => {
             await dispatch(updateProduct(idProd, formData))
             toast('Updated Product ID Successfully');
+            handleCloseEditProduct();
         }, 1000)
     }
 
