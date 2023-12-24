@@ -74,7 +74,7 @@ exports.resizeProductImages = asyncHandler(async (req, res, next) => {
 exports.createProduct = factory.createOne(Product);
 
 // Get All Products
-exports.getAllProducts = factory.getAll(Product);
+exports.getAllProducts = factory.getAll(Product, 'Products');
 
 // Get Product Details
 exports.getProductDetails = factory.getOne(Product);
