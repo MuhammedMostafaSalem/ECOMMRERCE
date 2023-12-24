@@ -15,18 +15,50 @@
     text-transform: capitalize;
     font-weight: normal;
 }
-.sideFilter .priceSection,
+.sideFilter h6 span {
+    font-weight: 500;
+}
+.sideFilter .currentRange {
+    font-size: 13px;
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+.sideFilter .currentRange input {
+    border: 1px solid var(--move-color);
+    border-radius: 6px;
+    padding: 1px 3px;
+    color: var(--move-color);
+    width: 60px;
+    text-align: center;
+}
+.sideFilter .currentRange input::placeholder {
+    text-align: center;
+}
+.sideFilter .currentRange input:focus {
+    outline: none;
+}
+.sideFilter .currentRange span {
+    font-weight: 600;
+}
 .sideFilter .catSection,
 .sideFilter .rateSection {
     display: flex;
-    gap: 10px;
     flex-direction: column;
 }
-.iconStar {
-    color: #ffa700;
+.sideFilter .rateSection .rateStars {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
-.iconStar:hover {
-    cursor: pointer;
+.sideFilter .rateSection .rateStars .clearRate {
+    border: 1px solid var(--blue-color);
+    color: gray;
+    padding: 3px 10px;
+    width: 102px;
+    cursor: url(../../images/pointer.png), auto;
 }
 
 
