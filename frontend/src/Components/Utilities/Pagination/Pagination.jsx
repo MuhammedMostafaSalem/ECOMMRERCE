@@ -2,8 +2,11 @@ import React from 'react'
 import ReactPaginate from 'react-paginate';
 import './Pagination.css'
 
-const Pagination = () => {
-    const handlePageClick = () => {}
+const Pagination = ({pageCount, onPress}) => {
+    const handlePageClick = (data) => {
+        onPress(data.selected + 1)
+        console.log(data.selected + 1)
+    }
     return (
         <div>
             <ReactPaginate
@@ -12,7 +15,7 @@ const Pagination = () => {
                 onPageChange={handlePageClick}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={2}
-                pageCount={50}
+                pageCount={pageCount}
                 previousLabel="Prev"
                 pageClassName="page-item"
                 pageLinkClassName="page-link linkPage"
