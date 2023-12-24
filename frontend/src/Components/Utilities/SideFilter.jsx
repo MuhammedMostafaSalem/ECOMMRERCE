@@ -1,78 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Slider from '@mui/material/Slider';
 import StarIcon from '@mui/icons-material/Star';
+import FilterHook from '../../Hooks/Search/FilterHook';
+import Rating from 'react-rating';
+import { FaRegStar, FaStar } from "react-icons/fa6";
 
 const SideFilter = () => {
+    const [itemsCat, clickCategory, priceMin, onChagePriceMin, priceMax, onChagePriceMax, starRating, onChangeRating, clearRating] = FilterHook();
+    
     return (
         <div className='sideFilter'>
-            <div className='priceSection'>
-                <h6>price</h6>
-                <div className='rangePrice d-flex gap-3'>
-                    <p>0</p>
-                    <Slider
-                        size="small"
-                        aria-label="Small"
-                        valueLabelDisplay="auto"
-                        min={0}
-                        max={2500}
-                    />
-                    <p>2500</p>
+            <div className='priceRange'>
+                <h6>price <span>range</span></h6>
+                <div className='currentRange'>
+                    <input type='text' placeholder='MIN' value={priceMin} onChange={onChagePriceMin} />
+                    <span>to</span>
+                    <input type='text' placeholder='MAX' value={priceMax} onChange={onChagePriceMax} />
                 </div>
             </div>
             <div className='catSection'>
                 <h6>categories</h6>
                 <div className='catInpits'>
                     <div className="d-flex gap-2">
-                        <input type="checkbox" value="" />
-                        <div className="filter-sub me-2 ">الكل</div>
+                        <input type="checkbox" value="0" onChange={clickCategory} />
+                        <div className="filter-sub me-2 ">all</div>
                     </div>
-                    <div className="d-flex gap-2">
-                        <input type="checkbox" value="" />
-                        <div className="filter-sub me-2 ">موبايل</div>
-                    </div>
-                    <div className="d-flex gap-2">
-                        <input type="checkbox" value="" />
-                        <div className="filter-sub me-2 ">لابتوب</div>
-                    </div>
-                    <div className="d-flex gap-2">
-                        <input type="checkbox" value="" />
-                        <div className="filter-sub me-2 ">مكياج</div>
-                    </div>
-                    <div className="d-flex gap-2">
-                        <input type="checkbox" value="" />
-                        <div className="filter-sub me-2 ">سماعة</div>
-                    </div>
+                    {
+                        itemsCat ?
+                            itemsCat.map((item, index) => (
+                                <div className="d-flex gap-2" key={index}>
+                                    <input type="checkbox" value={item._id} onChange={clickCategory} />
+                                    <div className="filter-sub me-2 ">{item.name}</div>
+                                </div>
+                            ))
+                        : null
+                    }
                 </div>
             </div>
             
             <div className='rateSection'>
                 <h6>ratings above</h6>
                 <div className='rateStars'>
-                    <div className="d-flex gap-2">
-                        <StarIcon className='iconStar' />
-                    </div>
-                    <div className="d-flex gap-2">
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                    </div>
-                    <div className="d-flex gap-2">
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                    </div>
-                    <div className="d-flex gap-2">
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                    </div>
-                    <div className="d-flex gap-2">
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                        <StarIcon className='iconStar' />
-                    </div>
+                    <Rating
+                        emptySymbol={<FaRegStar />}
+                        fullSymbol={<FaStar />}
+                        fractions={2}
+                        className='fs-5 text-warning'
+                        initialRating={starRating}
+                        onChange={onChangeRating}
+                    />
+                    <div className='btn clearRate' onClick={clearRating}>clear rating</div>
                 </div>
             </div>
         </div>
