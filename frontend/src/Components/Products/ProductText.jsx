@@ -2,18 +2,18 @@ import React from 'react'
 import { Col, Row } from 'react-bootstrap'
 import StarIcon from '@mui/icons-material/Star';
 
-const ProductText = () => {
+const ProductText = ({prodItem, cat}) => {
     return (
         <div>
             <Row>
-                <div className="cat-text">category :</div>
+                <div className="cat-text">category: {cat.name}</div>
             </Row>
             <Row>
                 <Col>
                     <h4>
-                        product name
+                        {prodItem.title}
                     </h4>
-                    <div className="cat-title d-inline">product # 65414646454</div>
+                    <div className="cat-title d-inline">product # {prodItem._id}</div>
                 </Col>
             </Row>
             <Row style={{margin: '10px 0'}}>
@@ -25,14 +25,14 @@ const ProductText = () => {
                         <StarIcon className='iconStar' />
                         <StarIcon className='iconStar' />
                     </div>
-                    <div className='cat-text'>(1 Reviews)</div>
+                    <div className='cat-text'>({prodItem.ratingsQuantity} Reviews)</div>
                 </Col>
             </Row>
             <Row className="mt-4">
                 <Col>
                     <Row className='pricingBox'>
                         <Col md='4' sm='4' xs='12'>
-                            <div className="product-price">$ 34000</div>
+                            <div className="product-price">$ {prodItem.price}</div>
                         </Col>
                         <Col md='4' sm='4' xs='12'>
                             <div className='qauntity'>
@@ -55,7 +55,11 @@ const ProductText = () => {
             </Row>
             <Row className="mt-4" style={{borderTop: '1px solid #e1e1e1', borderBottom: '1px solid #e1e1e1'}}>
                 <h6 className='py-2'>
-                    Status: <span style={{color: 'green'}}>InStock</span>
+                    Status: {
+                        prodItem.quantity >= 1 ?
+                            <span style={{color: 'green'}}>InStock</span>
+                        : <span style={{color: 'tomato'}}>OutOfStock</span>
+                    }
                 </h6>
             </Row>
             <Row className="mt-4">
@@ -63,7 +67,7 @@ const ProductText = () => {
             </Row>
             <Row>
                 <Col md="10">
-                    <div className="product-description d-inline">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus inventore pariatur quaerat adipisci non quidem itaque, velit delectus ipsam esse.</div>
+                    <div className="product-description d-inline">{prodItem.description}</div>
                 </Col>
             </Row>
         </div>
