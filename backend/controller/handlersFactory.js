@@ -35,7 +35,7 @@ exports.createOne = (Model) => asyncHandler(async (req, res) => {
 });
 
 
-exports.getAll = (Model, modelName = "") => asyncHandler(async (req, res) => {
+exports.getAll = (Model, modelName = '') => asyncHandler(async (req, res) => {
     let filter = {};
     if (req.filterObject) {
         filter = req.filterObject;
@@ -71,15 +71,15 @@ exports.getAll = (Model, modelName = "") => asyncHandler(async (req, res) => {
 });
 
 
-exports.getOne = (Model) => asyncHandler(async (req, res, next) => {
+exports.getOne = (Model, populateOpts) => asyncHandler(async (req, res, next) => {
     const { id } = req.params;
 
     // Build query
-    // let query = Model.findById(id);
-    // if (populateOpts) query = query.populate(populateOpts);
+    let query = Model.findById(id);
+    if (populateOpts) query = query.populate(populateOpts);
 
     // Execute query
-    const document = await Model.findById(id);
+    const document = await query;
 
     if (!document) {
         return next(new ErrorHandler(`No document for this id ${id}`, 404));
