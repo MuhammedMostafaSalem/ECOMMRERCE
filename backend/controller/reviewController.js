@@ -124,6 +124,12 @@ exports.createFilterObj = (req, res, next) => {
     next();
 };
 
+// Get all reviews
+exports.getReviews = factory.getAll(Review);
+
+// Get one review by id
+exports.getReview = factory.getOne(Review);
+
 // Allow nested routes
 exports.setProductAndUserIds = (req, res, next) => {
     if (!req.body.product) req.body.product = req.params.productId;
@@ -134,11 +140,6 @@ exports.setProductAndUserIds = (req, res, next) => {
 // Create review
 exports.createReview = factory.createOne(Review);
 
-// Get all reviews
-exports.getReviews = factory.getAll(Review);
-
-// Get one review by id
-exports.getReview = factory.getOne(Review);
 
 // Update review
 exports.updateReview = factory.updateOne(Review);
