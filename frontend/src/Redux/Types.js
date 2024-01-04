@@ -78,4 +78,11 @@ export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
 
 
+
+// types review
+export const CREATE_REVIEW = "CREATE_REVIEW";
+export const EDIT_REVIEW = "EDIT_REVIEW";
+export const DELETE_REVIEW = "DELETE_REVIEW";
+
+
 export const GET_ERROR = "GET_ERROR"
