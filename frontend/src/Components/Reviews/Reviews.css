@@ -1,0 +1,68 @@
+.reviewContainer h4 {
+    color: #979797;
+    font-weight: 400;
+    border-bottom: 2px solid #deddde;
+    padding-bottom: 1vmax;
+    width: 20vmax;
+    text-align: center;
+    margin: auto;
+}
+.reviewContainer .reviews {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+.reviewItem {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.226);
+    border: 1px solid rgba(56, 56, 56, 0.116);
+    color: rgba(0, 0, 0, 0.445);
+    font: 300 0.8vmax cursive;
+    width: 28vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 12px;
+    padding: 3vmax;
+    position: relative;
+}
+.reviewItem .icons {
+    position: absolute;
+    top: 2px;
+    right: 9px;
+    font-size: 20px;
+    display: flex;
+    gap: 10px;
+}
+.reviewItem .icons svg {
+    cursor: url(../../images/pointer.png), auto;
+}
+.reviewItem img {
+    width: 5vmax;
+    border-radius: 50%;
+}
+.reviewItem p {
+    color: rgba(0, 0, 0, 0.836);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+}
+.reviewItem .rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    font-size: 13px;
+}
+.reviewItem .rating div {
+    color: rgba(0, 0, 0, 0.445);
+}
+.reviewItem .reviewItemComment {
+    color: rgba(0, 0, 0, 0.445);
+    font: 300 12px cursive;
+    text-align: center;
+}
