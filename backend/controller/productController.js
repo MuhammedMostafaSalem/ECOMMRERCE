@@ -77,7 +77,7 @@ exports.createProduct = factory.createOne(Product);
 exports.getAllProducts = factory.getAll(Product, 'Products');
 
 // Get Product Details
-exports.getProductDetails = factory.getOne(Product);
+exports.getProductDetails = factory.getOne(Product, 'reviews');
 
 // Update Product -- Admin
 exports.updateProduct = factory.updateOne(Product);
