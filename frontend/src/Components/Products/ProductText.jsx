@@ -1,10 +1,10 @@
 import React from 'react'
-import { Col, Row } from 'react-bootstrap'
+import { Card, Col, Row } from 'react-bootstrap'
 import StarIcon from '@mui/icons-material/Star';
 
 const ProductText = ({prodItem, cat}) => {
     return (
-        <div>
+        <Card style={{border: 'none'}}>
             <Row>
                 <div className="cat-text">category: {cat.name}</div>
             </Row>
@@ -66,11 +66,9 @@ const ProductText = ({prodItem, cat}) => {
                 <div className="cat-text">Description :</div>
             </Row>
             <Row>
-                <Col md="10">
-                    <div className="product-description d-inline">{prodItem.description}</div>
-                </Col>
+                <div className="product-description">{prodItem.description}</div>
             </Row>
-        </div>
+        </Card>
     )
 }
 
