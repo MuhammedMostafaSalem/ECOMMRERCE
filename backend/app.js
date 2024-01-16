@@ -29,6 +29,7 @@ const auth = require("./routes/authRoute");
 const user = require("./routes/userRoute");
 const review = require("./routes/reviewRoute");
 const order = require("./routes/orderRoute");
+const cart = require("./routes/cartRoute");
 
 app.options("*", cors());
 
@@ -40,6 +41,7 @@ app.use('/api/v1', auth);
 app.use('/api/v1', user);
 app.use('/api/v1', review);
 app.use('/api/v1', order);
+app.use('/api/v1/cart', cart);
 
 
 
