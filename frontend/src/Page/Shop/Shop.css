@@ -113,6 +113,10 @@
 }
 
 /* product text */
+.color {
+    cursor: url(../../images/pointer.png), auto !important;
+    width: 30px !important;
+}
 .cat-text {
     color: #979797;
     font-size: 12px;
