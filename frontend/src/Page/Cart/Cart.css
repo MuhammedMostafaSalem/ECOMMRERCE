@@ -16,7 +16,7 @@
     color: tomato;
     text-transform: capitalize;
     font-size: 12px;
-    cursor: pointer;
+    cursor: url(../../images/pointer.png), auto !important;
     width: 43px;
 }
 .cartPage th {
@@ -71,6 +71,19 @@
     padding: 5px 0;
     border: none;
     border-radius: 20px;
+    cursor: url(../../images/pointer.png), auto !important;
+}
+
+.cartQTY {
+    display: flex;
+    gap: 10px;
+    margin: 35px auto;
+}
+.cartQTY input:focus {
+    outline: none;
+}
+.cartQTY .btn {
+    cursor: url(../../images/pointer.png), auto !important;
 }
 
 @media (max-width: 575px) {
