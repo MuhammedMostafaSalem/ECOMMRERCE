@@ -85,4 +85,13 @@ export const EDIT_REVIEW = "EDIT_REVIEW";
 export const DELETE_REVIEW = "DELETE_REVIEW";
 
 
+
+// types cart
+export const ADD_TO_CART = "ADD_TO_CART";
+export const GET_ALL_CART = "GET_ALL_CART";
+export const DELETE_ONE_CART = "DELETE_ONE_CART";
+export const DELETE_ALL_CART = "DELETE_ALL_CART";
+export const UPDATE_QUANTITY = "UPDATE_QUANTITY";
+
+
 export const GET_ERROR = "GET_ERROR"
