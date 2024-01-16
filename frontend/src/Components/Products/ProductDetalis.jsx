@@ -6,7 +6,18 @@ import { FaRegStar, FaStar } from "react-icons/fa6";
 import Rating from 'react-rating';
 import CreateReviewHook from '../../Hooks/Review/CreateReviewHook';
 
-const ProductDetalis = ({id, prodItem, images, cat}) => {
+const ProductDetalis = ({
+    id,
+    prodItem,
+    images,
+    cat,
+    quantity,
+    increaseQuantity,
+    decreaseQuantity,
+    indexColor,
+    colorClick,
+    addToCartHandler
+}) => {
     const [
         review,
         onChangeReview,
@@ -56,7 +67,16 @@ const ProductDetalis = ({id, prodItem, images, cat}) => {
                         <ProductGallery images={images} />
                     </Col>
                     <Col md='6'>
-                        <ProductText prodItem={prodItem} cat={cat} />
+                        <ProductText
+                            prodItem={prodItem}
+                            cat={cat}
+                            quantity={quantity}
+                            increaseQuantity={increaseQuantity}
+                            decreaseQuantity={decreaseQuantity}
+                            indexColor={indexColor}
+                            colorClick={colorClick}
+                            addToCartHandler={addToCartHandler}
+                        />
                         <div className="btn product-cart-add mt-3" onClick={handleShow}>Add Review</div>
                     </Col>
                 </Row>
