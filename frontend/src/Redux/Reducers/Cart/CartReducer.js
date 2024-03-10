@@ -1,10 +1,11 @@
-import { ADD_TO_CART, DELETE_ONE_CART, GET_ALL_CART, UPDATE_QUANTITY } from "../../Types"
+import { ADD_TO_CART, DELETE_ONE_CART, GET_ALL_CART, SAVE_SHIPPING_INFO, UPDATE_QUANTITY } from "../../Types"
 
 const initail = {
     cartItems: [],
     getAllCart: [],
     deleteOneCart: [],
     editQuantityCart: [],
+    shippingInfo: {},
     loading: true,
 }
 
@@ -33,6 +34,11 @@ const CartReducer = (state=initail, action) => {
                 ...state,
                 editQuantityCart: action.payload,
                 loading: false,
+            }
+        case SAVE_SHIPPING_INFO:
+            return {
+                ...state,
+                shippingInfo: action.payload,
             }
         default:
             return state;
