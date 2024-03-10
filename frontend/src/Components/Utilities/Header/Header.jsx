@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Header.css'
 import { Squash as Hamburger } from 'hamburger-react';
 import logo from "../../../images/logo.png";
@@ -12,9 +12,11 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../Redux/Actions/Auth/AuthActions';
 import Cookie from 'cookie-universal'
+import { Modal } from 'react-bootstrap';
+import SearchHook from '../../../Hooks/Search/SearchHook';
 
 const Header = ({isAuthenticated, user}) => {
     const cookies = Cookie();
@@ -57,7 +59,15 @@ const Header = ({isAuthenticated, user}) => {
             }
         }
     }
-
+    
+    const [active, setActive] = useState(false);
+    const toggledActive = () => setActive (!active);
+    useEffect(() => {
+        let handler = () =>  {
+            setActive(false)
+        }
+        document.addEventListener('mousedown', handler);
+    })
 
     // create an active page link
     const nav_links = [
@@ -82,15 +92,54 @@ const Header = ({isAuthenticated, user}) => {
         );
     }
 
+
+    const [keyword, onChangeSearch] = SearchHook();
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (
         <div className='divNavbar' >
+            <Modal
+                className='searchModal'
+                show={show}
+                onHide={handleClose}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <div id="contained-modal-title-vcenter">
+                    <input
+                        type='search'
+                        placeholder='Search a product ...'
+                        className='inputSearch'
+                        value={keyword}
+                        onChange={onChangeSearch}
+                    />
+                    <button className='btnSearch' >Search</button>
+                </div>
+            </Modal>
+
+
+
             <header>
                 <Hamburger toggled={open} toggle={setOpen} color={open ? "#b696e0" : "#000"} />
                 {
                     isAuthenticated === true ?
                         <div className='menu-container'>
-                            <div className='imgUser' onClick={()=>{setOpenMenuUser(!openMenuUser)}}>
-                                <img src={userAvatar} alt='' />
+                            <div className='d-flex gap-3 align-items-center'>
+                                <div className='searchBox' id={active ? 'active' : ''}>
+                                    <input
+                                        type='search'
+                                        placeholder='Search a product ...'
+                                        
+                                    />
+                                    <SearchIcon onClick={toggledActive} />
+                                    </div>
+                                    <SearchIcon onClick={handleShow} />
+                                <div className='imgUser' onClick={()=>{setOpenMenuUser(!openMenuUser)}}>
+                                    <img src={userAvatar} alt='' />
+                                </div>
                             </div>
         
                             <div className={`dropdownMenuUser ${openMenuUser? 'active' : ''}`}>
@@ -109,7 +158,7 @@ const Header = ({isAuthenticated, user}) => {
                                         <DropdownItem icon={<ListAltIcon />} text = {"Orders"}/>
                                     </Link>
                                     <Link to='/cart'>
-                                        <DropdownItem icon={<LocalMallOutlinedIcon />} text = {"Cart (0)"}/>
+                                        <DropdownItem icon={<LocalMallOutlinedIcon />} text = {"Cart"}/>
                                     </Link>
                                     <DropdownItem icon={<LogoutIcon onClick={logoutUser} />} text = {"Logout"}/>
                                 </ul>
