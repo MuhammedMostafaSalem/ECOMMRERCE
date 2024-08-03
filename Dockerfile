@@ -4,7 +4,7 @@ FROM node:14
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the package.json and package-lock.json
+# Copy the backend package.json and package-lock.json
 COPY backend/package*.json ./backend/
 
 # Install backend dependencies
@@ -13,7 +13,7 @@ RUN cd backend && npm install
 # Copy the backend source code
 COPY backend/ ./backend/
 
-# Copy the package.json and package-lock.json for frontend
+# Copy the frontend package.json and package-lock.json
 COPY frontend/package*.json ./frontend/
 
 # Install frontend dependencies
