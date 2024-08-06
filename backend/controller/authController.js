@@ -10,6 +10,7 @@ const asyncHandler = require('express-async-handler');
 const {v4: uuidv4} = require("uuid");
 const sharp = require("sharp");
 const multer = require('multer');
+const path = require("path");
 
 
 // exports.uploadUserImage = uploadSingleImage('image');
@@ -45,17 +46,34 @@ exports.uploadUserImage = upload.fields([
 ]);
 
 exports.resizeImage = asyncHandler(async (req, res, next) => {
-    if (req.files.avatar) {
+    // if (req.files.avatar) {
+    //     const ext = req.files.avatar[0].mimetype.split('/')[1];
+    //     const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
+
+    //     await sharp(req.files.avatar[0].buffer)
+    //         .toFile(`uploads/users/${avatarFilename}`); // write into a file on the disk
+
+    //     // Save imageCover into database
+    //     req.body.avatar = avatarFilename;
+    // }
+    const uploadDir = path.join(__dirname, '../uploads/users');
+
+    // Ensure the directory exists
+    if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    
+    if (req.files && req.files.avatar) {
         const ext = req.files.avatar[0].mimetype.split('/')[1];
         const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
+        const avatarPath = path.join(uploadDir, avatarFilename);
 
         await sharp(req.files.avatar[0].buffer)
-            .toFile(`uploads/users/${avatarFilename}`); // write into a file on the disk
+            .toFile(avatarPath); // Write into a file on the disk
 
         // Save imageCover into database
         req.body.avatar = avatarFilename;
     }
-
     next();
 });
 
