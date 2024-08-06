@@ -138,8 +138,7 @@ const Header = ({isAuthenticated, user}) => {
                                     </div>
                                     <SearchIcon onClick={handleShow} />
                                 <div className='imgUser' onClick={()=>{setOpenMenuUser(!openMenuUser)}}>
-                                    {/* <img src={userAvatar} alt='' /> */}
-                                    <div>{userIn.name}</div>
+                                    <img src={userAvatar} alt='' />
                                 </div>
                             </div>
         
