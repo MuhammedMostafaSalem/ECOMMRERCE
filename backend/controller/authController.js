@@ -10,8 +10,6 @@ const asyncHandler = require('express-async-handler');
 const {v4: uuidv4} = require("uuid");
 const sharp = require("sharp");
 const multer = require('multer');
-const path = require("path");
-const fs = require("fs");
 
 
 // exports.uploadUserImage = uploadSingleImage('image');
@@ -47,41 +45,18 @@ exports.uploadUserImage = upload.fields([
 ]);
 
 exports.resizeImage = asyncHandler(async (req, res, next) => {
-    // if (req.files.avatar) {
-    //     const ext = req.files.avatar[0].mimetype.split('/')[1];
-    //     const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
+    if (req.files.avatar) {
+        const ext = req.files.avatar[0].mimetype.split('/')[1];
+        const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
 
-    //     await sharp(req.files.avatar[0].buffer)
-    //         .toFile(`uploads/users/${avatarFilename}`); // write into a file on the disk
+        await sharp(req.files.avatar[0].buffer)
+            .toFile(`uploads/users/${avatarFilename}`); // write into a file on the disk
 
-    //     // Save imageCover into database
-    //     req.body.avatar = avatarFilename;
-    // }
-
-    // next();
-    try {
-        if (req.files.avatar) {
-            const ext = req.files.avatar[0].mimetype.split('/')[1];
-            const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
-            const uploadPath = path.join(__dirname, 'uploads', 'users');
-    
-            // Ensure the directory exists
-            if (!fs.existsSync(uploadPath)) {
-                fs.mkdirSync(uploadPath, { recursive: true });
-            }
-    
-            await sharp(req.files.avatar[0].buffer)
-                .toFile(path.join(uploadPath, avatarFilename)); // write into a file on the disk
-    
-            // Save imageCover into database
-            req.body.avatar = avatarFilename;
-        }
-    
-        next();
-    } catch(error) {
-        console.error('Error resizing image:', error);
-        next(error);
+        // Save imageCover into database
+        req.body.avatar = avatarFilename;
     }
+
+    next();
 });
 
 
