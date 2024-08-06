@@ -58,25 +58,50 @@ exports.resizeImage = asyncHandler(async (req, res, next) => {
     // }
     
     
-    const uploadDir = path.join(__dirname, '../uploads/users');
+    // const uploadDir = path.join(__dirname, '../uploads/users');
 
-    // Ensure the directory exists
-    if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-    }
+    // // Ensure the directory exists
+    // if (!fs.existsSync(uploadDir)) {
+    //     fs.mkdirSync(uploadDir, { recursive: true });
+    // }
     
-    if (req.files && req.files.avatar) {
-        const ext = req.files.avatar[0].mimetype.split('/')[1];
-        const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
-        const avatarPath = path.join(uploadDir, avatarFilename);
+    // if (req.files && req.files.avatar) {
+    //     const ext = req.files.avatar[0].mimetype.split('/')[1];
+    //     const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
+    //     const avatarPath = path.join(uploadDir, avatarFilename);
 
-        await sharp(req.files.avatar[0].buffer)
-            .toFile(avatarPath); // Write into a file on the disk
+    //     await sharp(req.files.avatar[0].buffer)
+    //         .toFile(avatarPath); // Write into a file on the disk
 
-        // Save imageCover into database
-        req.body.avatar = avatarFilename;
+    //     // Save imageCover into database
+    //     req.body.avatar = avatarFilename;
+    // }
+    // next();
+
+    try {
+        const uploadDir = path.join(__dirname, '../uploads/users');
+
+        // Ensure the directory exists
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        if (req.files && req.files.avatar) {
+            const ext = req.files.avatar[0].mimetype.split('/')[1];
+            const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
+            const avatarPath = path.join(uploadDir, avatarFilename);
+
+            await sharp(req.files.avatar[0].buffer)
+                .toFile(avatarPath); // Write into a file on the disk
+
+            // Save imageCover into database
+            req.body.avatar = avatarFilename;
+        }
+
+        next();
+    } catch (error) {
+        next(error); // Pass errors to the next middleware
     }
-    next();
 });
 
 
