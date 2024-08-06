@@ -11,6 +11,7 @@ const {v4: uuidv4} = require("uuid");
 const sharp = require("sharp");
 const multer = require('multer');
 const path = require("path");
+const fs = require('fs');
 
 
 // exports.uploadUserImage = uploadSingleImage('image');
