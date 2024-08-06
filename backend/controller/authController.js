@@ -59,24 +59,29 @@ exports.resizeImage = asyncHandler(async (req, res, next) => {
     // }
 
     // next();
-    if (req.files.avatar) {
-        const ext = req.files.avatar[0].mimetype.split('/')[1];
-        const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
-        const uploadPath = path.join(__dirname, 'uploads', 'users');
-
-        // Ensure the directory exists
-        if (!fs.existsSync(uploadPath)) {
-            fs.mkdirSync(uploadPath, { recursive: true });
+    try {
+        if (req.files.avatar) {
+            const ext = req.files.avatar[0].mimetype.split('/')[1];
+            const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
+            const uploadPath = path.join(__dirname, 'uploads', 'users');
+    
+            // Ensure the directory exists
+            if (!fs.existsSync(uploadPath)) {
+                fs.mkdirSync(uploadPath, { recursive: true });
+            }
+    
+            await sharp(req.files.avatar[0].buffer)
+                .toFile(path.join(uploadPath, avatarFilename)); // write into a file on the disk
+    
+            // Save imageCover into database
+            req.body.avatar = avatarFilename;
         }
-
-        await sharp(req.files.avatar[0].buffer)
-            .toFile(path.join(uploadPath, avatarFilename)); // write into a file on the disk
-
-        // Save imageCover into database
-        req.body.avatar = avatarFilename;
+    
+        next();
+    } catch(error) {
+        console.error('Error resizing image:', error);
+        next(error);
     }
-
-    next();
 });
 
 
