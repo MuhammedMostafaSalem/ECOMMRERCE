@@ -56,24 +56,46 @@ exports.resizeImage = asyncHandler(async (req, res, next) => {
     //     // Save imageCover into database
     //     req.body.avatar = avatarFilename;
     // }
-    const uploadDir = path.join(__dirname, '../uploads/users');
-
-    // Ensure the directory exists
-    if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-    }
     
-    if (req.files && req.files.avatar) {
+    if (req.files.avatar) {
+        const uploadDir = path.join(__dirname, '../uploads/users');
+
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
         const ext = req.files.avatar[0].mimetype.split('/')[1];
         const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
-        const avatarPath = path.join(uploadDir, avatarFilename);
+
+        let format = ext;
+        if (format === 'jpg') format = 'jpeg';
 
         await sharp(req.files.avatar[0].buffer)
-            .toFile(avatarPath); // Write into a file on the disk
+            .resize(500, 500)
+            .toFormat(format)
+            .toFile(path.join(uploadDir, avatarFilename)); // Save to disk
 
-        // Save imageCover into database
+        // Save the filename in the request body
         req.body.avatar = avatarFilename;
     }
+    // const uploadDir = path.join(__dirname, '../uploads/users');
+
+    // // Ensure the directory exists
+    // if (!fs.existsSync(uploadDir)) {
+    //     fs.mkdirSync(uploadDir, { recursive: true });
+    // }
+    
+    // if (req.files && req.files.avatar) {
+    //     const ext = req.files.avatar[0].mimetype.split('/')[1];
+    //     const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
+    //     const avatarPath = path.join(uploadDir, avatarFilename);
+
+    //     await sharp(req.files.avatar[0].buffer)
+    //         .toFile(avatarPath); // Write into a file on the disk
+
+    //     // Save imageCover into database
+    //     req.body.avatar = avatarFilename;
+    // }
     next();
 });
 
