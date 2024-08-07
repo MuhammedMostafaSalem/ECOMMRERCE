@@ -55,7 +55,7 @@ const userSchema = new mongoose.Schema({
 const setImageUrl = (doc) => {
     if (doc.avatar) {
         // const imageUrl = `${process.env.BASE_URL}/users/${doc.avatar}`;
-        const imageUrl = `https://ecommrerce.vercel.app/uploads/users/${doc.avatar}`;
+        const imageUrl = `https://ecommrerce.vercel.app/users/${doc.avatar}`;
         doc.avatar = imageUrl;
     }
 };
