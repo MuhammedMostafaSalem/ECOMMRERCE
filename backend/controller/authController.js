@@ -10,6 +10,8 @@ const asyncHandler = require('express-async-handler');
 const {v4: uuidv4} = require("uuid");
 const sharp = require("sharp");
 const multer = require('multer');
+const path = require("path");
+const fs = require("fs");
 
 
 // exports.uploadUserImage = uploadSingleImage('image');
@@ -48,12 +50,21 @@ exports.resizeImage = asyncHandler(async (req, res, next) => {
     if (req.files.avatar) {
         const ext = req.files.avatar[0].mimetype.split('/')[1];
         const avatarFilename = `user-${uuidv4()}-${Date.now()}-cover.${ext}`;
+        const imagePath = path.join(__dirname, '..', 'uploads', 'users');
+
+        if (!fs.existsSync(imagePath)) {
+            fs.mkdirSync(imagePath, { recursive: true });
+        }
 
         await sharp(req.files.avatar[0].buffer)
-            .toFile(`uploads/users/${avatarFilename}`); // write into a file on the disk
+            .resize(500, 500)
+            .toFormat('jpeg')
+            .jpeg({ quality: 90 })
+            .toFile(path.join(imagePath, avatarFilename)); // write into a file on the disk
+            // .toFile(`uploads/users/${avatarFilename}`); // write into a file on the disk
 
         // Save imageCover into database
-        req.body.avatar = avatarFilename;
+        req.body.avatar = `/uploads/users/${avatarFilename}`;
     }
 
     next();
