@@ -48,11 +48,11 @@ app.use('/api/v1', order);
 app.use('/api/v1/cart', cart);
 
 
-// app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-// app.get("*", (req, rea) => {
-//     res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"))
-// })
+app.get("*", (req, rea) => {
+    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"))
+})
 
 // Middleware for Errors
 app.use(errorMiddleware)
