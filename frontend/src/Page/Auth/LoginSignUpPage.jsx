@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import './Auth.css'
 import Login from '../../Components/Auth/Login'
 import Register from '../../Components/Auth/Signup'
-import { Link } from 'react-router-dom'
 
 const LoginSignUpPage = () => {
     const loginTab = useRef(null);
@@ -39,7 +38,6 @@ const LoginSignUpPage = () => {
                 <Login loginTab={loginTab} />
                 <Register registerTab={registerTab} />
             </div>
-            <Link to='/admin/dashboard'>Admin Dashboard</Link>
         </div>
     )
 }
